@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClienteDAO extends PessoaDAO {
+public class ClienteDAO extends DAO {
     private static ClienteDAO instance;
 
     private ClienteDAO() {
@@ -26,25 +26,19 @@ public class ClienteDAO extends PessoaDAO {
 
     // CRUD
     public Cliente create(String nome, String endereco, String telefone, String email, String cpf) {
-        Pessoa pessoa = super.create(nome, endereco, telefone);
-        
-        if (pessoa == null) {
-        // Trate a falha, por exemplo, lançando uma exceção ou retornando null
-        Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, "Falha ao criar Pessoa");
-        return null; // Ou lance uma exceção, se preferir
-        }
-        
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO cliente (codigo, email, cpf) VALUES (?,?,?)");
-            stmt.setInt(1, pessoa.getCodigo());
-            stmt.setString(2, email);
-            stmt.setString(3, cpf);
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO cliente (nome, endereco, telefone, email, cpf) VALUES (?,?,?,?,?)");
+            stmt.setString(1, nome);
+            stmt.setString(2, endereco);
+            stmt.setString(3, telefone);
+            stmt.setString(4, email);
+            stmt.setString(5, cpf);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return this.retrieveById(pessoa.getCodigo());
+        return this.retrieveById(lastId("cliente","codigo"));
     }
 
     private Cliente buildObject(ResultSet rs) {
@@ -53,6 +47,7 @@ public class ClienteDAO extends PessoaDAO {
             cliente = new Cliente();
             cliente.setCodigo(rs.getInt("codigo"));
             cliente.setNome(rs.getString("nome"));
+            cliente.setEndereco(rs.getString("endereco"));
             cliente.setTelefone(rs.getString("telefone"));
             cliente.setEmail(rs.getString("email"));
             cliente.setCpf(rs.getString("cpf"));
@@ -78,34 +73,36 @@ public class ClienteDAO extends PessoaDAO {
 
     // RetrieveAll
     public List retrieveAll() {
-        return this.retrieve("SELECT * FROM pessoa INNER JOIN cliente ON pessoa.codigo = cliente.codigo");
+        return this.retrieve("SELECT * FROM cliente");
     }
 
     // RetrieveLast
     public List retrieveLast(){
-        return this.retrieve("SELECT * FROM pessoa INNER JOIN cliente ON pessoa.codigo = cliente.codigo WHERE pessoa.codigo = " + lastId("pessoa","codigo"));
+        return this.retrieve("SELECT * FROM cliene WHERE codigo = " + lastId("cliente","codigo"));
     }
 
     // RetrieveById
     public Cliente retrieveById(int id) {
-        List<Cliente> clientes = this.retrieve("SELECT * FROM pessoa INNER JOIN cliente ON pessoa.codigo = cliente.codigo WHERE pessoa.codigo = " + id);
+        List<Cliente> clientes = this.retrieve("SELECT * FROM cliente WHERE codigo = " + id);
         return (clientes.isEmpty()?null:clientes.get(0));
     }
 
     // RetrieveBySimilarName
     public List retrieveBySimilarName(String nome) {
-        return this.retrieve("SELECT * FROM pessoa INNER JOIN cliente ON pessoa.codigo = cliente.codigo WHERE pessoa.nome LIKE '%" + nome + "%'");
+        return this.retrieve("SELECT * FROM cliente WHERE nome LIKE '%" + nome + "%'");
     }
 
     // Update
     public void update(Cliente cliente) {
-        super.update(cliente);
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE cliente SET email=?, cpf=? WHERE codigo=?");
-            stmt.setString(1, cliente.getEmail());
-            stmt.setString(2, cliente.getCpf());
-            stmt.setInt(3, cliente.getCodigo());
+            stmt = DAO.getConnection().prepareStatement("UPDATE cliente SET nome=?, endereco=?, telefone=?, email=?, cpf=? WHERE codigo=?");
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getEndereco());
+            stmt.setString(3, cliente.getTelefone());
+            stmt.setString(4, cliente.getEmail());
+            stmt.setString(5, cliente.getCpf());
+            stmt.setInt(6, cliente.getCodigo());
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
@@ -119,7 +116,6 @@ public class ClienteDAO extends PessoaDAO {
             stmt = DAO.getConnection().prepareStatement("DELETE FROM cliente WHERE codigo = ?");
             stmt.setInt(1, cliente.getCodigo());
             executeUpdate(stmt);
-            super.delete(cliente);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

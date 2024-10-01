@@ -27,7 +27,7 @@ public class AnimalDAO extends DAO {
     public Animal create(String nome, String especie, String raca, char sexo, double peso, int cliente_id, int classeAnimal) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO animal (nome, especie, raca, sexo, peso, cliente_id, classe_animal) VALUES (?,?,?,?,?,?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO animal (nome, especie, raca, sexo, peso, cliente_id, classe_animal) VALUES (?,?,?,?,?,?,?)");
             stmt.setString(1, nome);
             stmt.setString(2, especie);
             stmt.setString(3, raca);

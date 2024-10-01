@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.Animal;
 import model.Veterinario;
 import model.Pessoa;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VeterinarioDAO extends PessoaDAO {
+public class VeterinarioDAO extends DAO {
     private static VeterinarioDAO instance;
 
     private VeterinarioDAO() {
@@ -26,19 +27,20 @@ public class VeterinarioDAO extends PessoaDAO {
 
     // CRUD
     public Veterinario create(String nome, String endereco, String telefone, String crmv, int especialidade, String horaAtendimento) {
-        Pessoa pessoa = super.create(nome, endereco, telefone);
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO veterinario (codigo, crmv, especialidade, hora_atendimento) VALUES (?,?,?,?)");
-            stmt.setInt(1, pessoa.getCodigo());
-            stmt.setString(2, crmv);
-            stmt.setInt(3, especialidade);
-            stmt.setString(4, horaAtendimento);
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO veterinario (nome, endereco, telefone, crmv, especialidade, hora_atendimento) VALUES (?,?,?,?,?,?,?)");
+            stmt.setString(1, nome);
+            stmt.setString(2, endereco);
+            stmt.setString(3, telefone);
+            stmt.setString(4, crmv);
+            stmt.setInt(5, especialidade);
+            stmt.setString(6, horaAtendimento);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(VeterinarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return this.retrieveById(pessoa.getCodigo());
+        return this.retrieveById(lastId("veterinario","codigo"));
     }
 
     private Veterinario buildObject(ResultSet rs) {
@@ -59,7 +61,7 @@ public class VeterinarioDAO extends PessoaDAO {
     }
 
     // Generic Retriever
-    public List retrieve(String query) {
+    public List<Veterinario> retrieve(String query) {
         List<Veterinario> veterinarios = new ArrayList<>();
         ResultSet rs = getResultSet(query);
         try {
@@ -74,35 +76,37 @@ public class VeterinarioDAO extends PessoaDAO {
 
     // RetrieveAll
     public List retrieveAll() {
-        return this.retrieve("SELECT * FROM pessoa INNER JOIN veterinario ON pessoa.codigo = veterinario.codigo");
+        return this.retrieve("SELECT * FROM veterinario");
     }
 
     // RetrieveLast
     public List retrieveLast(){
-        return this.retrieve("SELECT * FROM pessoa INNER JOIN veterinario ON pessoa.codigo = veterinario.codigo WHERE pessoa.codigo = " + lastId("pessoa","codigo"));
+        return this.retrieve("SELECT * FROM veterinario WHERE codigo = " + lastId("veterinario","codigo"));
     }
 
     // RetrieveById
     public Veterinario retrieveById(int id) {
-        List<Veterinario> veterinarios = this.retrieve("SELECT * FROM pessoa INNER JOIN veterinario ON pessoa.codigo = veterinario.codigo WHERE pessoa.codigo = " + id);
+        List<Veterinario> veterinarios = this.retrieve("SELECT * FROM veterinario WHERE codigo = " + id);
         return (veterinarios.isEmpty()?null:veterinarios.get(0));
     }
 
     // RetrieveBySimilarName
     public List retrieveBySimilarName(String nome) {
-        return this.retrieve("SELECT * FROM pessoa INNER JOIN veterinario ON pessoa.codigo = veterinario.codigo WHERE pessoa.nome LIKE '%" + nome + "%'");
+        return this.retrieve("SELECT * FROM veterinario WHERE nome LIKE '%" + nome + "%'");
     }
 
     // Update
     public void update(Veterinario veterinario) {
-        super.update(veterinario);
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE veterinario SET crmv=?, especialidade=?, hora_atendimento=? WHERE codigo=?");
-            stmt.setString(1, veterinario.getCrmv());
-            stmt.setInt(2, veterinario.getEspecialidade());
-            stmt.setString(3, veterinario.getHoraAtendimento());
-            stmt.setInt(4, veterinario.getCodigo());
+            stmt = DAO.getConnection().prepareStatement("UPDATE veterinario SET nome=?, endereco=?, telefone=?, crmv=?, especialidade=?, hora_atendimento=? WHERE codigo=?");
+            stmt.setString(1, veterinario.getNome());
+            stmt.setString(2, veterinario.getEndereco());
+            stmt.setString(3, veterinario.getTelefone());
+            stmt.setString(4, veterinario.getCrmv());
+            stmt.setInt(5, veterinario.getEspecialidade());
+            stmt.setString(6, veterinario.getHoraAtendimento());
+            stmt.setInt(7, veterinario.getCodigo());
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
@@ -116,7 +120,6 @@ public class VeterinarioDAO extends PessoaDAO {
             stmt = DAO.getConnection().prepareStatement("DELETE FROM veterinario WHERE codigo = ?");
             stmt.setInt(1, veterinario.getCodigo());
             executeUpdate(stmt);
-            super.delete(veterinario);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

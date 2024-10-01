@@ -71,13 +71,13 @@ public abstract class DAO {
         try {
             PreparedStatement stmt;
 
-            // Table Pessoa:
-            stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS pessoa( \n"
-                    + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
-                    + "nome VARCHAR(200), \n"
-                    + "endereco VARCHAR(200), \n"
-                    + "telefone VARCHAR(20)); \n");
-            executeUpdate(stmt);
+//            // Table Pessoa:
+//            stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS pessoa( \n"
+//                    + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
+//                    + "nome VARCHAR(200), \n"
+//                    + "endereco VARCHAR(200), \n"
+//                    + "telefone VARCHAR(20)); \n");
+//            executeUpdate(stmt);
 
             // Table ClasseAnimal:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS classe_animal( \n"
@@ -87,20 +87,24 @@ public abstract class DAO {
 
             // Table Veterinario:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS veterinario( \n"
-                    + "codigo INT PRIMARY KEY, \n"
+                    + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
+                    + "nome VARCHAR(200), \n"
+                    + "endereco VARCHAR(200), \n"
+                    + "telefone VARCHAR(20)), \n"
                     + "crmv VARCHAR(14), \n"
                     + "especialidade INT, \n"
                     + "hora_atendimento VARCHAR(50), \n"
-                    + "FOREIGN KEY (codigo) REFERENCES pessoa(codigo), \n"
                     + "FOREIGN KEY (especialidade) REFERENCES classe_animal(codigo)); \n");
             executeUpdate(stmt);
 
             // Table Cliente:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS cliente( \n"
-                    + "codigo INT PRIMARY KEY, \n"
+                    + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
+                    + "nome VARCHAR(200), \n"
+                    + "endereco VARCHAR(200), \n"
+                    + "telefone VARCHAR(20)), \n"
                     + "email VARCHAR(200), \n"
-                    + "cpf CHAR(11), \n"
-                    + "FOREIGN KEY (codigo) REFERENCES pessoa(codigo)); \n");
+                    + "cpf CHAR(11)); \n");
             executeUpdate(stmt);
 
             // Table Animal:
