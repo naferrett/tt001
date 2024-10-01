@@ -1,8 +1,6 @@
 package model.dao;
 
 import model.Cliente;
-import model.Pessoa;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

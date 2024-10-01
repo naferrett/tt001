@@ -2,7 +2,6 @@ package model.dao;
 
 import model.Animal;
 import model.Veterinario;
-import model.Pessoa;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -80,7 +79,7 @@ public class VeterinarioDAO extends DAO {
     }
 
     // RetrieveLast
-    public List retrieveLast(){
+    public List<Veterinario> retrieveLast(){
         return this.retrieve("SELECT * FROM veterinario WHERE codigo = " + lastId("veterinario","codigo"));
     }
 

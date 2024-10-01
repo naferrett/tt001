@@ -39,9 +39,7 @@ public abstract class DAO {
     }
 
     protected int executeUpdate(PreparedStatement queryStatement) throws SQLException {
-        int update;
-        update = queryStatement.executeUpdate();
-        return update;
+        return queryStatement.executeUpdate();
     }
 
     protected int lastId(String tableName, String primaryKey) {
@@ -90,7 +88,7 @@ public abstract class DAO {
                     + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
                     + "nome VARCHAR(200), \n"
                     + "endereco VARCHAR(200), \n"
-                    + "telefone VARCHAR(20)), \n"
+                    + "telefone VARCHAR(20), \n"
                     + "crmv VARCHAR(14), \n"
                     + "especialidade INT, \n"
                     + "hora_atendimento VARCHAR(50), \n"
@@ -102,9 +100,9 @@ public abstract class DAO {
                     + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
                     + "nome VARCHAR(200), \n"
                     + "endereco VARCHAR(200), \n"
-                    + "telefone VARCHAR(20)), \n"
+                    + "telefone VARCHAR(20), \n"
                     + "email VARCHAR(200), \n"
-                    + "cpf CHAR(11)); \n");
+                    + "cpf VARCHAR(20)); \n");
             executeUpdate(stmt);
 
             // Table Animal:
