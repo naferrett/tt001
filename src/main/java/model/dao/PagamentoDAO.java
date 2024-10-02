@@ -81,6 +81,11 @@ public class PagamentoDAO extends DAO {
         List<Pagamento> pagamentos = this.retrieve("SELECT * FROM pagamento WHERE codigo = " + id);
         return (pagamentos.isEmpty()?null:pagamentos.get(0));
     }
+    
+    // RetrieveByConsulta
+    public List<Pagamento> retrieveByConsulta(int idConsulta){
+        return this.retrieve("SELECT * FROM pagamento WHERE consulta_id = " + idConsulta);
+    }
 
     // Update
     public void update(Pagamento pagamento) {

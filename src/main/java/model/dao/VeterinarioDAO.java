@@ -94,6 +94,11 @@ public class VeterinarioDAO extends DAO {
         return this.retrieve("SELECT * FROM veterinario WHERE nome LIKE '%" + nome + "%'");
     }
 
+    // RetrieveByEspecialidade
+    public List retrieveByEspecialidade(int especialidade) {
+        return this.retrieve("SELECT * FROM veterinario WHERE especialidade = " + especialidade);
+    }
+    
     // Update
     public void update(Veterinario veterinario) {
         try {

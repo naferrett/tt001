@@ -84,6 +84,11 @@ public class TratamentoDAO extends DAO {
         List<Tratamento> tratamentos = this.retrieve("SELECT * FROM tratamento WHERE codigo = " + id);
         return (tratamentos.isEmpty()?null:tratamentos.get(0));
     }
+    
+    // RetrieveByAnimal
+    public List<Tratamento> retrieveByAnimal(int animalTratado) {
+        return this.retrieve("SELECT * FROM tratamento WHERE animalTratado = " + animalTratado);
+    }
 
     // Update
     public void update(Tratamento tratamento) {

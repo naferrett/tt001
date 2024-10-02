@@ -88,6 +88,11 @@ public class ConsultaDAO extends DAO {
         List<Consulta> consultas = this.retrieve("SELECT * FROM consulta WHERE codigo = " + id);
         return (consultas.isEmpty()?null:consultas.get(0));
     }
+    
+    // RetrieveByTratamento
+    public List<Consulta> retrievebyTratamento(int idTratamento) {
+        return this.retrieve("SELECT * FROM consulta WHERE tratamento_id = " + idTratamento);
+    }
 
     // Update
     public void update(Consulta consulta) {
