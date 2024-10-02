@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.dao.AnimalDAO;
 import model.dao.ClienteDAO;
+import model.dao.VeterinarioDAO;
 
 /**
  *
@@ -38,7 +39,11 @@ public class Principal extends javax.swing.JFrame {
         jTextField12.setText("");
         
       
-        Controller.setTableModel(jTable1, new ClienteTableModel(ClienteDAO.getInstance().retrieveAll()));
+        //Controller.setTableModel(jTable1, new ClienteTableModel(ClienteDAO.getInstance().retrieveAll()));
+        //Controller.setTableModel(jTable2, new AnimalTableModel(AnimalDAO.getInstance().retrieveAll()));
+        //Controller.setTableModel(jTable3, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAll()));
+        Controller.jTableMostraClientes(jTable1);
+        //Controller.jTableMostraAnimais(jTable1);
         Controller.setTextFields(jTextField1, jTextField3);
     }
     /**
@@ -266,8 +271,18 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setToolTipText("");
 
         jButton4.setText("Novo Animal");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Deletar Animal");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -280,6 +295,11 @@ public class Principal extends javax.swing.JFrame {
                 "Nome", "Classe", "Espécie", "Raça", "Sexo", "Peso"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable2MousePressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -333,6 +353,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel7.setText("Buscar:");
 
         jTextField6.setText("jTextField6");
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField6KeyTyped(evt);
+            }
+        });
 
         jButton6.setText("Todos");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -342,6 +367,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jButton7.setText("Novo Veterinário");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Deletar Veterinário");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -361,6 +391,11 @@ public class Principal extends javax.swing.JFrame {
                 "Nome", "Endereço", "Telefone", "Especialidade", "Período de Atendimento", "CRMV"
             }
         ));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable3MousePressed(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -882,30 +917,21 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    // Cadastra novo veterinário
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        if (jTable1.getModel() instanceof VeterinarioTableModel)
+            ((GenericTableModel)jTable1.getModel()).addItem(Controller.adicionarVeterinario("", "", "", "", "", ""));
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    // Deletar cliente
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(Controller.getClienteSelecionado() != null) {
-            ((ClienteTableModel)jTable1.getModel()).removeItem(jTable1.getSelectedRow());
-            Controller.deletarCliente(Controller.getClienteSelecionado());
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
+    // ?
     private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
         Controller.jTableMostraClientes(jTable1);
         if (!Controller.jTableMostraAnimais(jTable1))
@@ -914,6 +940,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         Controller.setSelecionado(((GenericTableModel) jTable1.getModel()).getItem(jTable1.getSelectedRow()));
+        Controller.jTableMostraAnimais(jTable2);
     }//GEN-LAST:event_jTable1MousePressed
 
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
@@ -935,6 +962,56 @@ public class Principal extends javax.swing.JFrame {
         jTextField3.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    // Deletar cliente
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(Controller.getClienteSelecionado() != null) {
+            ((ClienteTableModel)jTable1.getModel()).removeItem(jTable1.getSelectedRow());
+            Controller.deletarCliente(Controller.getClienteSelecionado());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    // Animal
+    // Cadastrar novo animal
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (jTable1.getModel() instanceof AnimalTableModel)
+            ((GenericTableModel)jTable1.getModel()).addItem(Controller.adicionarAnimal("", "", "", "", '0', 0.0));
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    // Deletar animal
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(Controller.getAnimalSelecionado() != null) {
+            ((AnimalTableModel)jTable1.getModel()).removeItem(jTable1.getSelectedRow());
+            Controller.deletarAnimal(Controller.getAnimalSelecionado());
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable1.getModel()).getItem(jTable1.getSelectedRow()));
+    }//GEN-LAST:event_jTable2MousePressed
+    
+    // Veterinário
+    private void jTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable1.getModel()).getItem(jTable1.getSelectedRow()));
+    }//GEN-LAST:event_jTable3MousePressed
+
+    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+        Controller.atualizarBuscaVeterinario(jTable3, jTextField6.getText());
+    }//GEN-LAST:event_jTextField6KeyTyped
+
+    // Mostra todos os veterinários
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        ((GenericTableModel)jTable3.getModel()).addListOfItems(Controller.mostrarTodosVets());
+        jTextField6.setText("");
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    // Deletar veterinário
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        if(Controller.getVeterinarioSelecionado() != null) {
+            ((VeterinarioTableModel)jTable3.getModel()).removeItem(jTable3.getSelectedRow());
+            Controller.deletarVet(Controller.getVeterinarioSelecionado());
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
