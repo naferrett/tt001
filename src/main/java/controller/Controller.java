@@ -41,6 +41,10 @@ public class Controller {
     private static Pagamento pagamentoSelecionado = null;
     @Getter
     private static ClasseAnimal classeAnimalSelecionada = null;
+    @Getter
+    private static String sexoFemininoSelecionado = null;
+    @Getter
+    private static String sexoMasculinoSelecionado = null;
     private static JTextField clienteSelecionadoTextField = null;
     private static JTextField animalSelecionadoTextField = null;
     private static JTextField classeAnimalSelecionadaTextField = null;
@@ -81,6 +85,7 @@ public class Controller {
             classeAnimalSelecionada = (ClasseAnimal) selecionado;
         }
     }
+    
 
     // Cliente
     public static void jTableMostraClientes(JTable table) {
@@ -254,5 +259,25 @@ public class Controller {
     // Classe Animal
     public static void jTableMostraClasseAnimal(JTable table) {
         setTableModel(table, new ClasseAnimalTableModel(ClasseAnimalDAO.getInstance().retrieveAll()));
+    }
+    
+    // Sexo do animal
+    public static String sexoFemininoSelecionado() {
+        return "F";
+    }
+    
+    public static String sexoMasculinoSelecionado() {
+        return "M";
+    }
+
+    public static void criarClassesAnimais() {
+        ClasseAnimalDAO classeAnimal = ClasseAnimalDAO.getInstance();
+        //String[] classesAnimais = {"Anfíbio", "Ave", "Mamífero", "Peixe", "Réptil"};
+
+        classeAnimal.create("Anfíbio");
+        classeAnimal.create("Ave");
+        classeAnimal.create("Mamífero");
+        classeAnimal.create("Peixe");
+        classeAnimal.create("Réptil");
     }
 }
