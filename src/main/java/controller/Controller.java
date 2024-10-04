@@ -22,13 +22,7 @@ import model.dao.ExameDAO;
 import model.dao.PagamentoDAO;
 import model.dao.TratamentoDAO;
 import model.dao.VeterinarioDAO;
-import view.AnimalTableModel;
-import view.ClienteTableModel;
-import view.ConsultaTableModel;
-import view.ExameTableModel;
-import view.GenericTableModel;
-import view.TratamentoTableModel;
-import view.VeterinarioTableModel;
+import view.*;
 
 public class Controller {
     @Getter
@@ -45,6 +39,8 @@ public class Controller {
     private static Exame exameSelecionado = null;
     @Getter
     private static Pagamento pagamentoSelecionado = null;
+    @Getter
+    private static ClasseAnimal classeAnimalSelecionada = null;
     private static JTextField clienteSelecionadoTextField = null;
     private static JTextField animalSelecionadoTextField = null;
     private static JTextField classeAnimalSelecionadaTextField = null;
@@ -81,6 +77,8 @@ public class Controller {
             exameSelecionado = (Exame) selecionado;
         } else if (selecionado instanceof Pagamento) {
             pagamentoSelecionado = (Pagamento) selecionado;
+        } else if (selecionado instanceof ClasseAnimal) {
+            classeAnimalSelecionada = (ClasseAnimal) selecionado;
         }
     }
 
@@ -126,8 +124,8 @@ public class Controller {
         }
     }
 
-    public static Animal adicionarAnimal(String nome, Integer classeAnimal, String especie, String raca, String sexo, Double peso) {
-        return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, getClienteSelecionado().getCodigo(), classeAnimal);
+    public static Animal adicionarAnimal(String nome, String classeAnimal, String especie, String raca, String sexo, Double peso) {
+        return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, getClienteSelecionado().getCodigo(), getClasseAnimalSelecionada().getCodigo());
     }
 
 //    public static Animal adicionarAnimal(String nome, String classeAnimal, String especie, String raca, String sexo, Double peso) {
@@ -159,8 +157,8 @@ public class Controller {
         ((GenericTableModel)table.getModel()).addListOfItems(Controller.buscarVeterinario(nome));
     }
     
-    public static Veterinario adicionarVeterinario(String nome, String endereco, String telefone, Integer especialidade, String periodo, String crmv) {
-        return VeterinarioDAO.getInstance().create(nome, endereco, telefone, crmv, especialidade, periodo);
+    public static Veterinario adicionarVeterinario(String nome, String endereco, String telefone, String especialidade, String periodo, String crmv) {
+        return VeterinarioDAO.getInstance().create(nome, endereco, telefone, crmv, getClasseAnimalSelecionada().getCodigo(), periodo);
     }
 
 //    public static Veterinario adicionarVeterinario(String nome, String endereco, String telefone, String especialidade, String periodo, String crmv) {
@@ -251,6 +249,11 @@ public class Controller {
     
     public static void deletarPagamento(Pagamento pagamento) {
         PagamentoDAO.getInstance().delete(pagamento);
+    }
+
+    // Classe Animal
+    public static void jTableMostraClasseAnimal(JTable table) {
+        setTableModel(table, new ClasseAnimalTableModel(ClasseAnimalDAO.getInstance().retrieveAll()));
     }
 
     // Criação das classes de animais no banco

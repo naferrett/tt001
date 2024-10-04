@@ -35,6 +35,7 @@ public class Principal extends javax.swing.JFrame {
         jTextField13.setText("");
 
         Controller.jTableMostraClientes(jTable1);
+        Controller.jTableMostraClasseAnimal(jTable10);
         Controller.setTextFields(jTextField1, jTextField3, jTextField4, jTextField5);
     }
     /**
@@ -307,33 +308,22 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jTable2);
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Classes"));
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a Classe e Sexo"));
 
         jTable10.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Anfíbio"},
-                {"2", "Ave"},
-                {"3", "Mamífero"},
-                {"4", "Peixe"},
-                {"5", "Réptil"}
+
             },
             new String [] {
                 "Código da Classe", "Nome da Classe"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
+                java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jTable10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -355,6 +345,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -451,7 +442,15 @@ public class Principal extends javax.swing.JFrame {
             new String [] {
                 "Nome", "Endereço", "Telefone", "Especialidade", "Período de Atendimento", "CRMV"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable3MousePressed(evt);
@@ -1090,7 +1089,7 @@ public class Principal extends javax.swing.JFrame {
     // Cadastrar novo animal
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (jTable2.getModel() instanceof AnimalTableModel)
-            ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", 1, "", "", "", 0.0));
+            ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", "", "", 0.0));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     // Deletar animal
@@ -1118,7 +1117,7 @@ public class Principal extends javax.swing.JFrame {
     // Cadastra novo veterinários
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (jTable3.getModel() instanceof VeterinarioTableModel)
-            ((GenericTableModel)jTable3.getModel()).addItem(Controller.adicionarVeterinario("", "", "", 2, "", ""));
+            ((GenericTableModel)jTable3.getModel()).addItem(Controller.adicionarVeterinario("", "", "", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", ""));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     // Deletar veterinário
@@ -1184,8 +1183,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    // Tabelas de seleção de classe
     private void jTable10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable10MousePressed
-        // TODO add your handling code here:
+        Controller.setSelecionado(((GenericTableModel) jTable10.getModel()).getItem(jTable10.getSelectedRow()));
     }//GEN-LAST:event_jTable10MousePressed
 
 
