@@ -6,6 +6,8 @@ package view;
 
 import controller.Controller;
 
+import javax.swing.*;
+
 /**
  *
  * @author nathf
@@ -33,6 +35,10 @@ public class Principal extends javax.swing.JFrame {
         jTextField11.setText("");
         jTextField12.setText("");
         jTextField13.setText("");
+
+        sexoButtonGroup = new ButtonGroup();
+        sexoButtonGroup.add(jRadioSexoFeminino);
+        sexoButtonGroup.add(jRadioSexoMasculino);
 
         Controller.jTableMostraClientes(jTable1);
         Controller.jTableMostraClasseAnimal(jTable10);
@@ -1362,5 +1368,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private String sexoSelecionado = "";
+    private ButtonGroup sexoButtonGroup;
     // End of variables declaration//GEN-END:variables
 }

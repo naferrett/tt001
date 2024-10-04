@@ -270,14 +270,4 @@ public class Controller {
         return "M";
     }
 
-    public static void criarClassesAnimais() {
-        ClasseAnimalDAO classeAnimal = ClasseAnimalDAO.getInstance();
-        //String[] classesAnimais = {"Anfíbio", "Ave", "Mamífero", "Peixe", "Réptil"};
-
-        classeAnimal.create("Anfíbio");
-        classeAnimal.create("Ave");
-        classeAnimal.create("Mamífero");
-        classeAnimal.create("Peixe");
-        classeAnimal.create("Réptil");
-    }
 }
