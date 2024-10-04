@@ -80,7 +80,7 @@ public abstract class DAO {
             // Table ClasseAnimal:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS classe_animal( \n"
                     + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
-                    + "nome_classe VARCHAR(100)); \n");
+                    + "nome_classe VARCHAR(100) UNIQUE); \n");
             executeUpdate(stmt);
 
             // Table Veterinario:
@@ -122,8 +122,8 @@ public abstract class DAO {
             // Table Tratamento:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS tratamento( \n"
                     + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
-                    + "data_inicio DATE, \n"
-                    + "data_fim DATE, \n"
+                    + "data_inicio VARCHAR(20), \n"
+                    + "data_fim VARCHAR(20), \n"
                     + "descricao TEXT, \n"
                     + "animal_tratado INT, \n"
                     + "FOREIGN KEY (animal_tratado) REFERENCES animal(codigo)); \n");
@@ -132,7 +132,8 @@ public abstract class DAO {
             // Table Consulta:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS consulta( \n"
                     + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
-                    + "data DATETIME, \n"
+                    + "data VARCHAR(20), \n"
+                    + "periodo VARCHAR(20), \n"
                     + "veterinario_id INT, \n"
                     + "status VARCHAR(50), \n"
                     + "motivo VARCHAR(300), \n"
@@ -155,7 +156,7 @@ public abstract class DAO {
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS exame( \n"
                     + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
                     + "tipo VARCHAR(100), \n"
-                    + "data_solicitacao DATE, \n"
+                    + "data_solicitacao VARCHAR(20), \n"
                     + "status VARCHAR(50), \n"
                     + "consulta_id INT, \n"
                     + "FOREIGN KEY (consulta_id) REFERENCES consulta(codigo)); \n");

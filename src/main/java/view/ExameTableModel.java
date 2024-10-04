@@ -25,7 +25,7 @@ public class ExameTableModel extends GenericTableModel {
             case 0:
                 return String.class;
             case 1:
-                return Date.class;
+                return String.class;
             case 2:
                 return String.class;               
             default:
@@ -60,7 +60,7 @@ public class ExameTableModel extends GenericTableModel {
                 examesConsulta.setTipo((String)aValue);
                 break;
             case 1:
-                examesConsulta.setDataSolicitacao((Date)aValue); 
+                examesConsulta.setDataSolicitacao((String) aValue);
                 break;
             case 2:
                 examesConsulta.setStatus((String)aValue);    

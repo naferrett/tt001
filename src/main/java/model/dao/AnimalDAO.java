@@ -24,14 +24,14 @@ public class AnimalDAO extends DAO {
     }
 
     // CRUD
-    public Animal create(String nome, String especie, String raca, char sexo, double peso, int cliente_id, int classeAnimal) {
+    public Animal create(String nome, String especie, String raca, String sexo, double peso, int cliente_id, int classeAnimal) {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("INSERT INTO animal (nome, especie, raca, sexo, peso, cliente_id, classe_animal) VALUES (?,?,?,?,?,?,?)");
             stmt.setString(1, nome);
             stmt.setString(2, especie);
             stmt.setString(3, raca);
-            stmt.setString(4, String.valueOf(sexo));
+            stmt.setString(4, sexo);
             stmt.setDouble(5, peso);
             stmt.setInt(6, cliente_id);
             stmt.setInt(7, classeAnimal);
@@ -50,7 +50,7 @@ public class AnimalDAO extends DAO {
             animal.setNome(rs.getString("nome"));
             animal.setEspecie(rs.getString("especie"));
             animal.setRaca(rs.getString("raca"));
-            animal.setSexo(rs.getString("sexo").charAt(0));
+            animal.setSexo(rs.getString("sexo"));
             animal.setPeso(rs.getDouble("peso"));
             animal.setCliente_id(rs.getInt("cliente_id"));
             animal.setClasse_animal(rs.getInt("classe_animal"));
@@ -103,7 +103,7 @@ public class AnimalDAO extends DAO {
             stmt.setString(1, animal.getNome());
             stmt.setString(2, animal.getEspecie());
             stmt.setString(3, animal.getRaca());
-            stmt.setString(4, String.valueOf(animal.getSexo()));
+            stmt.setString(4, animal.getSexo());
             stmt.setDouble(5, animal.getPeso());
             stmt.setInt(6, animal.getCliente_id());
             stmt.setInt(7, animal.getClasse_animal());

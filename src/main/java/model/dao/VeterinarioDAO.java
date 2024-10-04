@@ -28,7 +28,7 @@ public class VeterinarioDAO extends DAO {
     public Veterinario create(String nome, String endereco, String telefone, String crmv, int especialidade, String horaAtendimento) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO veterinario (nome, endereco, telefone, crmv, especialidade, hora_atendimento) VALUES (?,?,?,?,?,?,?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO veterinario (nome, endereco, telefone, crmv, especialidade, hora_atendimento) VALUES (?,?,?,?,?,?)");
             stmt.setString(1, nome);
             stmt.setString(2, endereco);
             stmt.setString(3, telefone);

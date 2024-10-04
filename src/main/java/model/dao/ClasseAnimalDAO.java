@@ -31,7 +31,11 @@ public class ClasseAnimalDAO extends DAO {
             stmt.setString(1, nomeClasse);
             executeUpdate(stmt);
         } catch (SQLException ex) {
-            Logger.getLogger(ClasseAnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getErrorCode() == 23505) {
+                System.err.println("Erro: O nome da classe '" + nomeClasse + "' já existe.");
+            } else {
+                Logger.getLogger(ClasseAnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return this.retrieveById(lastId("classe_animal","codigo"));
     }
@@ -80,13 +84,14 @@ public class ClasseAnimalDAO extends DAO {
     
     // RetrieveByName
     public ClasseAnimal retrieveByName(String nomeClasse) {
-        List<ClasseAnimal> classeAnimais = this.retrieve("SELECT * FROM classe_animal WHERE nome_classe = " + nomeClasse);
+        List<ClasseAnimal> classeAnimais = this.retrieve("SELECT * FROM classe_animal WHERE nome_classe = '" + nomeClasse + "'");
         return (classeAnimais.isEmpty()?null:classeAnimais.get(0));
     }
 
     // RetrieveBySimilarName
-    public List<ClasseAnimal> retrieveBySimilarName(String nomeClasse) {
-        return this.retrieve("SELECT * FROM classe_animal WHERE nome_classe LIKE '%" + nomeClasse + "%'");
+    public ClasseAnimal retrieveBySimilarName(String nomeClasse) {
+        List<ClasseAnimal> classeAnimais = this.retrieve("SELECT * FROM classe_animal WHERE nome_classe LIKE '%" + nomeClasse + "%'");
+        return (classeAnimais.isEmpty()?null:classeAnimais.get(0));
     }
 
     // Update
@@ -101,6 +106,17 @@ public class ClasseAnimalDAO extends DAO {
             System.err.println("Exception: " + e.getMessage());
         }
     }
+
+    // DeleteAll
+    public void deleteAllGreaterThanFive() {
+        try {
+            PreparedStatement stmt = DAO.getConnection().prepareStatement("DELETE FROM classe_animal WHERE codigo >= 1");
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+
 
     // Delete
     public void delete(ClasseAnimal classeAnimal) {

@@ -32,7 +32,9 @@ public class VeterinarioTableModel extends GenericTableModel {
             case 3:
                 return String.class;
             case 4:
-                return String.class;                
+                return String.class;
+            case 5:
+                return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }

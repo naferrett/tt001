@@ -10,7 +10,7 @@ public class Animal {
     private String nome;
     private String especie;
     private String raca;
-    private char sexo;
+    private String sexo;
     private double peso;
     private int cliente_id;
     private int classe_animal;

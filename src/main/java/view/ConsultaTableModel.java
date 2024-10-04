@@ -21,14 +21,14 @@ import model.dao.VeterinarioDAO;
 public class ConsultaTableModel extends GenericTableModel{
         
     public ConsultaTableModel(List vDados){
-        super(vDados, new String[]{"Data", "Veterinário", "Status", "Motivo", "Observação"});
+        super(vDados, new String[]{"Data", "Periodo", "Veterinário", "Status", "Motivo", "Observação"});
     }
     
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Timestamp.class;
+                return String.class;
             case 1:
                 return String.class;
             case 2:
@@ -36,7 +36,9 @@ public class ConsultaTableModel extends GenericTableModel{
             case 3:
                 return String.class;
             case 4:
-                return String.class;                
+                return String.class;
+            case 5:
+                return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -51,15 +53,17 @@ public class ConsultaTableModel extends GenericTableModel{
             case 0:
                 return consultasTratamento.getData();
             case 1:
+                return  consultasTratamento.getPeriodo();
+            case 2:
                 Veterinario vetResponsavel = VeterinarioDAO.getInstance().retrieveById(consultasTratamento.getVeterinario_id());
                 if(vetResponsavel != null)
                     return vetResponsavel.getNome();
                 return "";
-            case 2:
-                return consultasTratamento.getStatus();
             case 3:
-                return consultasTratamento.getMotivo();
+                return consultasTratamento.getStatus();
             case 4:
+                return consultasTratamento.getMotivo();
+            case 5:
                 return consultasTratamento.getObservacoes();
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -73,18 +77,21 @@ public class ConsultaTableModel extends GenericTableModel{
                 
         switch (columnIndex) {
             case 0:
-                consultasTratamento.setData((Timestamp)aValue);
+                consultasTratamento.setData((String) aValue);
                 break;
             case 1:
-                // Veterinário não é alterado por meio dessa tabela?
+                consultasTratamento.setPeriodo((String) aValue);
                 break;
             case 2:
-                consultasTratamento.setStatus((String)aValue);    
+                // Veterinário não é alterado por meio dessa tabela?
                 break;
             case 3:
-                consultasTratamento.setMotivo((String)aValue); 
+                consultasTratamento.setStatus((String)aValue);    
                 break;
             case 4:
+                consultasTratamento.setMotivo((String)aValue); 
+                break;
+            case 5:
                 consultasTratamento.setObservacoes((String)aValue);
                 break;
             default:

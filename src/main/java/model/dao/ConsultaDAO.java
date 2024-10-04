@@ -25,16 +25,17 @@ public class ConsultaDAO extends DAO {
     }
 
     // CRUD
-    public Consulta create(Timestamp data, int veterinarioId, String status, String motivo, String observacoes, int tratamentoId) {
+    public Consulta create(String data, String periodo, int veterinarioId, String status, String motivo, String observacoes, int tratamentoId) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO consulta (data, veterinario_id, status, motivo, observacoes, tratamento_id) VALUES (?,?,?,?,?,?)");
-            stmt.setTimestamp(1, data);
-            stmt.setInt(2, veterinarioId);
-            stmt.setString(3, status);
-            stmt.setString(4, motivo);
-            stmt.setString(5, observacoes);
-            stmt.setInt(6, tratamentoId);
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO consulta (data, periodo, veterinario_id, status, motivo, observacoes, tratamento_id) VALUES (?,?,?,?,?,?,?)");
+            stmt.setString(1, data);
+            stmt.setString(2, periodo);
+            stmt.setInt(3, veterinarioId);
+            stmt.setString(4, status);
+            stmt.setString(5, motivo);
+            stmt.setString(6, observacoes);
+            stmt.setInt(7, tratamentoId);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,7 +48,8 @@ public class ConsultaDAO extends DAO {
         try {
             consulta = new Consulta();
             consulta.setCodigo(rs.getInt("codigo"));
-            consulta.setData(rs.getTimestamp("data"));
+            consulta.setData(rs.getString("data"));
+            consulta.setPeriodo(rs.getString("periodo"));
             consulta.setVeterinario_id(rs.getInt("veterinario_id"));
             consulta.setStatus(rs.getString("status"));
             consulta.setMotivo(rs.getString("motivo"));
@@ -98,14 +100,15 @@ public class ConsultaDAO extends DAO {
     public void update(Consulta consulta) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE consulta SET data=?, veterinario_id=?, status=?, motivo=?, observacoes=?, tratamento_id=? WHERE codigo=?");
-            stmt.setTimestamp(1, consulta.getData());
-            stmt.setInt(2, consulta.getVeterinario_id());
-            stmt.setString(3, consulta.getStatus());
-            stmt.setString(4, consulta.getMotivo());
-            stmt.setString(5, consulta.getObservacoes());
-            stmt.setInt(6, consulta.getTratamento_id());
-            stmt.setInt(7, consulta.getCodigo());
+            stmt = DAO.getConnection().prepareStatement("UPDATE consulta SET data=?, periodo=?, veterinario_id=?, status=?, motivo=?, observacoes=?, tratamento_id=? WHERE codigo=?");
+            stmt.setString(1, consulta.getData());
+            stmt.setString(2, consulta.getPeriodo());
+            stmt.setInt(3, consulta.getVeterinario_id());
+            stmt.setString(4, consulta.getStatus());
+            stmt.setString(5, consulta.getMotivo());
+            stmt.setString(6, consulta.getObservacoes());
+            stmt.setInt(7, consulta.getTratamento_id());
+            stmt.setInt(8, consulta.getCodigo());
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());

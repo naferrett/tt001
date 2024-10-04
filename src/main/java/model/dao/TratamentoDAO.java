@@ -25,12 +25,12 @@ public class TratamentoDAO extends DAO {
     }
 
     // CRUD
-    public Tratamento create(Date dataInicio, Date dataFim, String descricao, int animalTratado) {
+    public Tratamento create(String dataInicio, String dataFim, String descricao, int animalTratado) {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("INSERT INTO tratamento (data_inicio, data_fim, descricao, animal_tratado) VALUES (?,?,?,?)");
-            stmt.setDate(1, dataInicio);
-            stmt.setDate(2, dataFim);
+            stmt.setString(1, dataInicio);
+            stmt.setString(2, dataFim);
             stmt.setString(3, descricao);
             stmt.setInt(4, animalTratado);
             executeUpdate(stmt);
@@ -45,8 +45,8 @@ public class TratamentoDAO extends DAO {
         try {
             tratamento = new Tratamento();
             tratamento.setCodigo(rs.getInt("codigo"));
-            tratamento.setDataInicio(rs.getDate("data_inicio"));
-            tratamento.setDataFim(rs.getDate("data_fim"));
+            tratamento.setDataInicio(rs.getString("data_inicio"));
+            tratamento.setDataFim(rs.getString("data_fim"));
             tratamento.setDescricao(rs.getString("descricao"));
             tratamento.setAnimalTratado(rs.getInt("animal_tratado"));
         } catch (SQLException e) {
@@ -87,7 +87,7 @@ public class TratamentoDAO extends DAO {
     
     // RetrieveByAnimal
     public List<Tratamento> retrieveByAnimal(int animalTratado) {
-        return this.retrieve("SELECT * FROM tratamento WHERE animalTratado = " + animalTratado);
+        return this.retrieve("SELECT * FROM tratamento WHERE animal_tratado = " + animalTratado);
     }
 
     // Update
@@ -95,8 +95,8 @@ public class TratamentoDAO extends DAO {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("UPDATE tratamento SET data_inicio=?, data_fim=?, descricao=?, animal_tratado=? WHERE codigo=?");
-            stmt.setDate(1, tratamento.getDataInicio());
-            stmt.setDate(2, tratamento.getDataFim());
+            stmt.setString(1, tratamento.getDataInicio());
+            stmt.setString(2, tratamento.getDataFim());
             stmt.setString(3, tratamento.getDescricao());
             stmt.setInt(4, tratamento.getAnimalTratado());
             stmt.setInt(5, tratamento.getCodigo());

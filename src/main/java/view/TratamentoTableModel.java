@@ -27,9 +27,9 @@ public class TratamentoTableModel extends GenericTableModel{
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Date.class;
+                return String.class;
             case 1:
-                return Date.class;
+                return String.class;
             case 2:
                 return String.class;               
             default:
@@ -41,8 +41,6 @@ public class TratamentoTableModel extends GenericTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Tratamento tratamento = (Tratamento) vDados.get(rowIndex);
-        
-        Animal animalTratado = AnimalDAO.getInstance().retrieveById(tratamento.getAnimalTratado());
         
         switch (columnIndex) {
             case 0:
@@ -63,10 +61,10 @@ public class TratamentoTableModel extends GenericTableModel{
         
         switch (columnIndex) {
             case 0:
-                tratamento.setDataInicio((Date)aValue);
+                tratamento.setDataInicio((String)aValue);
                 break;
             case 1:
-                tratamento.setDataFim((Date)aValue);
+                tratamento.setDataFim((String)aValue);
                 break;
             case 2:
                 tratamento.setDescricao((String)aValue);    

@@ -148,7 +148,7 @@ public class Controller {
         return ClienteDAO.getInstance().retrieveBySimilarName(nome);
     }
 
-    // Atualiza a tablea com os clientes encontrados no banco
+    // Atualiza a tabela com os clientes encontrados no banco
     public static void atualizarBuscaCliente(JTable table, String nome) {
         ((GenericTableModel)table.getModel()).addListOfItems(Controller.buscarCliente(nome));
     }
@@ -175,11 +175,17 @@ public class Controller {
     }
     
     // Adiciona animal ao banco relacionado ao cliente selecionado
-    public static Animal adicionarAnimal(String nome, String classeAnimal, String especie, String raca, char sexo, Double peso) {
-        ClasseAnimal classe = ClasseAnimalDAO.getInstance().retrieveByName(classeAnimal);
+    public static Animal adicionarAnimal(String nome, Integer classeAnimal, String especie, String raca, String sexo, Double peso) {
+        ClasseAnimal classe = ClasseAnimalDAO.getInstance().retrieveById(classeAnimal);
         int cliente_id = getClienteSelecionado().getCodigo();
         return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, cliente_id, classe.getCodigo());
     }
+
+//    public static Animal adicionarAnimal(String nome, String classeAnimal, String especie, String raca, String sexo, Double peso) {
+//        ClasseAnimal classe = ClasseAnimalDAO.getInstance().retrieveByName(classeAnimal);
+//        int cliente_id = getClienteSelecionado().getCodigo();
+//        return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, cliente_id, classe.getCodigo());
+//    }
     
     public static void deletarAnimal(Animal animal) {
         //List<Animal> animais = AnimalDAO.getInstance().retrieveByCliente(cliente.getCodigo()); 
@@ -234,7 +240,7 @@ public class Controller {
     }
     
     // Exames
-    public static Exame adicionarExame(String tipo, Date dataSolicitacao, String status) {
+    public static Exame adicionarExame(String tipo, String dataSolicitacao, String status) {
         //Consulta consulta = ConsultaDAO.getInstance().retrieveByName(classeAnimal);
         //int cliente_id = getClienteSelecionado().getCodigo();
         return ExameDAO.getInstance().create(tipo, dataSolicitacao, status, consultaSelecionada.getCodigo()); // ? 
@@ -254,7 +260,74 @@ public class Controller {
     public static void deletarPagamento(Pagamento pagamento) {
         PagamentoDAO.getInstance().delete(pagamento);
     }
-    
+
+    public static void criarClassesAnimais() {
+        ClasseAnimalDAO classeAnimal = ClasseAnimalDAO.getInstance();
+        //String[] classesAnimais = {"Anfíbio", "Ave", "Mamífero", "Peixe", "Réptil"};
+
+        classeAnimal.create("Anfíbio");
+        classeAnimal.create("Ave");
+        classeAnimal.create("Mamífero");
+        classeAnimal.create("Peixe");
+        classeAnimal.create("Réptil");
+
+    }
+
+    public static void printAllClasseAnimais() {
+        ClasseAnimalDAO dao = ClasseAnimalDAO.getInstance();
+        //dao.deleteAllGreaterThanFive();
+
+        // Chame o método para recuperar todos os animais
+        List<ClasseAnimal> listaClasseAnimais = dao.retrieveAll();
+
+        // Verifique se a lista não está vazia
+        if (listaClasseAnimais.isEmpty()) {
+            System.out.println("Nenhuma classe animal encontrada.");
+        } else {
+            // Itere pela lista e imprima as informações
+            for (ClasseAnimal classeAnimal : listaClasseAnimais) {
+                System.out.println("Código: " + classeAnimal.getCodigo() + ", Nome da Classe: " + classeAnimal.getNomeClasse());
+            }
+        }
+    }
+
+
+    public static void exibirAnimaisDoCliente(int clienteId) {
+        // Buscar cliente pelo ID
+        Cliente cliente = ClienteDAO.getInstance().retrieveById(clienteId);
+
+        // Verificar se o cliente foi encontrado
+        if (cliente != null) {
+            System.out.println("Cliente encontrado: " + cliente.getNome());
+
+            // Buscar animais do cliente
+            List<Animal> animais = AnimalDAO.getInstance().retrieveByCliente(cliente.getCodigo());
+
+            // Verificar se o cliente tem animais
+            if (!animais.isEmpty()) {
+                System.out.println("Animais do cliente " + cliente.getNome() + ":");
+                for (Animal animal : animais) {
+                    System.out.println("- " + animal.getNome() + " (" + animal.getEspecie() + ")");
+                }
+            } else {
+                System.out.println("O cliente " + cliente.getNome() + " não possui animais cadastrados.");
+            }
+        } else {
+            System.out.println("Cliente não encontrado.");
+        }
+    }
+    public static Animal adicionarAnimalParaCliente1() {
+        String nome = "silvinho";
+        String especie = "cachorro";
+        String raca = "labrador";
+        String sexo = "M";
+        double peso = 30.5;
+        int clienteId = 1; // Cliente de código 1
+        int classeAnimal = 1; // Exemplo de classe do animal (precisa definir corretamente)
+
+        // Cria e retorna o animal
+        return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, clienteId, classeAnimal);
+    }
     
     public static Cliente getClienteSelecionado() {
         return clienteSelecionado;

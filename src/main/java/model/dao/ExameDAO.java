@@ -25,12 +25,12 @@ public class ExameDAO extends DAO {
     }
 
     // CRUD
-    public Exame create(String tipo, Date dataSolicitacao, String status, int consultaId) {
+    public Exame create(String tipo, String dataSolicitacao, String status, int consultaId) {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("INSERT INTO exame (tipo, data_solicitacao, status, consulta_id) VALUES (?,?,?,?)");
             stmt.setString(1, tipo);
-            stmt.setDate(2, dataSolicitacao);
+            stmt.setString(2, dataSolicitacao);
             stmt.setString(3, status);
             stmt.setInt(4, consultaId);
             executeUpdate(stmt);
@@ -46,7 +46,7 @@ public class ExameDAO extends DAO {
             exame = new Exame();
             exame.setCodigo(rs.getInt("codigo"));
             exame.setTipo(rs.getString("tipo"));
-            exame.setDataSolicitacao(rs.getDate("data_solicitacao"));
+            exame.setDataSolicitacao(rs.getString("data_solicitacao"));
             exame.setStatus(rs.getString("status"));
             exame.setConsulta_id(rs.getInt("consulta_id"));
         } catch (SQLException e) {
@@ -96,7 +96,7 @@ public class ExameDAO extends DAO {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("UPDATE exame SET tipo=?, data_solicitacao=?, status=?, consulta_id=? WHERE codigo=?");
             stmt.setString(1, exame.getTipo());
-            stmt.setDate(2, exame.getDataSolicitacao());
+            stmt.setString(2, exame.getDataSolicitacao());
             stmt.setString(3, exame.getStatus());
             stmt.setInt(4, exame.getConsulta_id());
             stmt.setInt(5, exame.getCodigo());

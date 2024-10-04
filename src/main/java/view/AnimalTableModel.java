@@ -26,13 +26,13 @@ public class AnimalTableModel extends GenericTableModel {
             case 0:
                 return String.class;
             case 1:
-                return String.class;
+                return Integer.class; // return Integer.class;
             case 2:
                 return String.class;
             case 3:
                 return String.class;
             case 4:
-                return char.class;        
+                return char.class;
             case 5:
                 return Double.class;
             default:
@@ -51,7 +51,7 @@ public class AnimalTableModel extends GenericTableModel {
             case 1:
                 ClasseAnimal classeAnimal = ClasseAnimalDAO.getInstance().retrieveById(animal.getClasse_animal());
                 if (classeAnimal != null)
-                    return classeAnimal.getNomeClasse();
+                    return classeAnimal.getCodigo(); //return classeAnimal.getNome_classe();
                 return "";
             case 2:
                 return animal.getEspecie();
@@ -76,11 +76,8 @@ public class AnimalTableModel extends GenericTableModel {
                 animal.setNome((String)aValue);
                 break;
             case 1:
-                ClasseAnimal classeAnimal = ClasseAnimalDAO.getInstance().retrieveByName((String)aValue);
-                
-                if (classeAnimal == null)
-                    classeAnimal = ClasseAnimalDAO.getInstance().create((String)aValue);
-                animal.setClasse_animal(classeAnimal.getCodigo());
+                ClasseAnimalDAO.getInstance().retrieveById((Integer)aValue);
+                // ClasseAnimalDAO.getInstance().retrieveByName((String)aValue);
                 break;
             case 2:
                 animal.setEspecie((String)aValue);    
@@ -89,7 +86,7 @@ public class AnimalTableModel extends GenericTableModel {
                 animal.setRaca((String)aValue);
                 break;
             case 4:
-                animal.setSexo((char)aValue);
+                animal.setSexo((String)aValue);
                 break;
             case 5:
                 animal.setPeso((Double)aValue);

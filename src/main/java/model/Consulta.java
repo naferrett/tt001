@@ -2,13 +2,13 @@ package model;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Data
 public class Consulta {
     private int codigo;
-    private Timestamp data;
+    private String data;
+    private String periodo;
     private int veterinario_id;
     private String motivo;
     private String status;
