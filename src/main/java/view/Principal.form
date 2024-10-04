@@ -591,12 +591,12 @@
                         </Container>
                         <Component class="javax.swing.JLabel" name="jLabel15">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Selecione o Sexo:"/>
+                            <Property name="text" type="java.lang.String" value="Selecione o G&#xea;nero:"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioSexoFeminino">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Feminino"/>
+                            <Property name="text" type="java.lang.String" value="F&#xea;mea"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioSexoFemininoActionPerformed"/>
@@ -604,7 +604,7 @@
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioSexoMasculino">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Masculino"/>
+                            <Property name="text" type="java.lang.String" value="Macho"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioSexoMasculinoActionPerformed"/>
@@ -1464,7 +1464,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jScrollPane8" pref="129" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane8" pref="0" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>

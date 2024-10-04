@@ -42,9 +42,9 @@ public class Controller {
     @Getter
     private static ClasseAnimal classeAnimalSelecionada = null;
     @Getter
-    private static String sexoFemininoSelecionado = null;
+    private static String femeaSelecionado = null;
     @Getter
-    private static String sexoMasculinoSelecionado = null;
+    private static String machoSelecionado = null;
     private static JTextField clienteSelecionadoTextField = null;
     private static JTextField animalSelecionadoTextField = null;
     private static JTextField classeAnimalSelecionadaTextField = null;
@@ -262,11 +262,11 @@ public class Controller {
     }
     
     // Sexo do animal
-    public static String sexoFemininoSelecionado() {
+    public static String femeaSelecionado() {
         return "F";
     }
     
-    public static String sexoMasculinoSelecionado() {
+    public static String machoSelecionado() {
         return "M";
     }
 

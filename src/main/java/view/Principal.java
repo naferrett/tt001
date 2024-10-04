@@ -36,9 +36,9 @@ public class Principal extends javax.swing.JFrame {
         jTextField12.setText("");
         jTextField13.setText("");
 
-        sexoButtonGroup = new ButtonGroup();
-        sexoButtonGroup.add(jRadioSexoFeminino);
-        sexoButtonGroup.add(jRadioSexoMasculino);
+        generoButtonGroup = new ButtonGroup();
+        generoButtonGroup.add(jRadioSexoFeminino);
+        generoButtonGroup.add(jRadioSexoMasculino);
 
         Controller.jTableMostraClientes(jTable1);
         Controller.jTableMostraClasseAnimal(jTable10);
@@ -345,16 +345,16 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane12.setViewportView(jTable10);
 
-        jLabel15.setText("Selecione o Sexo:");
+        jLabel15.setText("Selecione o Gênero:");
 
-        jRadioSexoFeminino.setText("Feminino");
+        jRadioSexoFeminino.setText("Fêmea");
         jRadioSexoFeminino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioSexoFemininoActionPerformed(evt);
             }
         });
 
-        jRadioSexoMasculino.setText("Masculino");
+        jRadioSexoMasculino.setText("Macho");
         jRadioSexoMasculino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioSexoMasculinoActionPerformed(evt);
@@ -928,7 +928,7 @@ public class Principal extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1130,7 +1130,7 @@ public class Principal extends javax.swing.JFrame {
     // Cadastrar novo animal
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (jTable2.getModel() instanceof AnimalTableModel)
-            ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", "", sexoSelecionado, 0.0));
+            ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", "", generoSelecionado, 0.0));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     // Deletar animal
@@ -1231,11 +1231,11 @@ public class Principal extends javax.swing.JFrame {
 
     // Botões de seleção de sexo do animal
     private void jRadioSexoFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoFemininoActionPerformed
-        sexoSelecionado = Controller.sexoFemininoSelecionado();
+        generoSelecionado = Controller.femeaSelecionado();
     }//GEN-LAST:event_jRadioSexoFemininoActionPerformed
 
     private void jRadioSexoMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoMasculinoActionPerformed
-        sexoSelecionado = Controller.sexoMasculinoSelecionado();
+        generoSelecionado = Controller.machoSelecionado();
     }//GEN-LAST:event_jRadioSexoMasculinoActionPerformed
 
     
@@ -1363,7 +1363,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
-    private String sexoSelecionado = "";
-    private ButtonGroup sexoButtonGroup;
+    private String generoSelecionado = "";
+    private ButtonGroup generoButtonGroup;
     // End of variables declaration//GEN-END:variables
 }
