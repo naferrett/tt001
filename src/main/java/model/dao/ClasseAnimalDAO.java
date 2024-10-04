@@ -108,7 +108,7 @@ public class ClasseAnimalDAO extends DAO {
     }
 
     // DeleteAll
-    public void deleteAllGreaterThanFive() {
+    public void deleteAll() {
         try {
             PreparedStatement stmt = DAO.getConnection().prepareStatement("DELETE FROM classe_animal WHERE codigo >= 1");
             executeUpdate(stmt);

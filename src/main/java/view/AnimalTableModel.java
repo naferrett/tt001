@@ -39,7 +39,6 @@ public class AnimalTableModel extends GenericTableModel {
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
     }
-    
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -51,7 +50,7 @@ public class AnimalTableModel extends GenericTableModel {
             case 1:
                 ClasseAnimal classeAnimal = ClasseAnimalDAO.getInstance().retrieveById(animal.getClasse_animal());
                 if (classeAnimal != null)
-                    return classeAnimal.getCodigo(); //return classeAnimal.getNome_classe();
+                    return classeAnimal.getNomeClasse(); //return classeAnimal.getNome_classe();
                 return "";
             case 2:
                 return animal.getEspecie();

@@ -95,6 +95,11 @@ public class AnimalDAO extends DAO {
         return this.retrieve("SELECT * FROM animal WHERE nome LIKE '%" + nome + "%'");
     }
 
+    // RetrieveByCliente
+    public List<Animal> retrieveByCliente(int clienteId) {
+        return this.retrieve("SELECT * FROM animal WHERE cliente_id = " + clienteId);
+    }
+
     // Update
     public void update(Animal animal) {
         try {
@@ -125,10 +130,4 @@ public class AnimalDAO extends DAO {
             System.err.println("Exception: " + e.getMessage());
         }
     }
-
-    // RetrieveByCliente
-    public List<Animal> retrieveByCliente(int clienteId) {
-        return this.retrieve("SELECT * FROM animal WHERE cliente_id = " + clienteId);
-    }
-
 }

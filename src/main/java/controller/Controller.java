@@ -1,11 +1,11 @@
 package controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+
+import lombok.Getter;
 import model.Animal;
 import model.ClasseAnimal;
 import model.Cliente;
@@ -27,17 +27,23 @@ import view.ClienteTableModel;
 import view.ConsultaTableModel;
 import view.ExameTableModel;
 import view.GenericTableModel;
-import view.PagamentoTableModel;
 import view.TratamentoTableModel;
 import view.VeterinarioTableModel;
 
 public class Controller {
+    @Getter
     private static Cliente clienteSelecionado = null;
+    @Getter
     private static Animal animalSelecionado = null;
+    @Getter
     private static Veterinario vetSelecionado = null;
+    @Getter
     private static Tratamento tratamentoSelecionado = null;
+    @Getter
     private static Consulta consultaSelecionada = null;
+    @Getter
     private static Exame exameSelecionado = null;
+    @Getter
     private static Pagamento pagamentoSelecionado = null;
     private static JTextField clienteSelecionadoTextField = null;
     private static JTextField animalSelecionadoTextField = null;
@@ -77,12 +83,39 @@ public class Controller {
             pagamentoSelecionado = (Pagamento) selecionado;
         }
     }
-    
-    // Exibição das tabelas na interface
+
+    // Cliente
     public static void jTableMostraClientes(JTable table) {
         setTableModel(table, new ClienteTableModel(ClienteDAO.getInstance().retrieveAll()));
     }
-    
+
+    public static List<Object> buscarCliente(String nome) {
+        return ClienteDAO.getInstance().retrieveBySimilarName(nome);
+    }
+
+    public static void atualizarBuscaCliente(JTable table, String nome) {
+        ((GenericTableModel)table.getModel()).addListOfItems(Controller.buscarCliente(nome));
+    }
+
+    public static Cliente adicionarCliente(String nome, String endereco, String telefone, String email, String cpf) {
+        return ClienteDAO.getInstance().create(nome, endereco, telefone, email, cpf);
+    }
+
+    public static List<Object> mostrarTodosClientes() {
+        return ClienteDAO.getInstance().retrieveAll();
+    }
+
+    public static void deletarCliente(Cliente cliente) {
+        List<Animal> animais = AnimalDAO.getInstance().retrieveByCliente(cliente.getCodigo()); 
+        
+        for(Animal animal : animais) { // Deletar um cliente inclui deletar todos os animais relacionados a ele no banco
+           AnimalDAO.getInstance().delete(animal);
+        }
+        
+        ClienteDAO.getInstance().delete(cliente);
+    }
+
+    // Animal
     public static boolean jTableMostraAnimais(JTable table) {
         if(Controller.getClienteSelecionado() != null) {
             setTableModel(table, new AnimalTableModel(AnimalDAO.getInstance().retrieveByCliente(Controller.getClienteSelecionado().getCodigo())));
@@ -92,93 +125,9 @@ public class Controller {
             return false;
         }
     }
-    
-    public static boolean jTableMostraVets(JTable table) {
-        if(Controller.getAnimalSelecionado() != null) {
-            setTableModel(table, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveByEspecialidade(Controller.getAnimalSelecionado().getClasse_animal())));
-            return true;
-        } else {
-            setTableModel(table, new VeterinarioTableModel(new ArrayList()));
-            return false;
-        }
-    }
-    
-    public static boolean jTableMostraTratamentos(JTable table) {
-        if(Controller.getAnimalSelecionado() != null) {
-            setTableModel(table, new TratamentoTableModel(TratamentoDAO.getInstance().retrieveByAnimal(Controller.getAnimalSelecionado().getCodigo()))); 
-            return true;
-        } else {
-            setTableModel(table, new TratamentoTableModel(new ArrayList()));
-            return false;
-        }
-    }
-    
-    public static boolean jTableMostraConsultas(JTable table) {
-        if(Controller.getTratamentoSelecionado() != null) {
-            setTableModel(table, new ConsultaTableModel(ConsultaDAO.getInstance().retrievebyTratamento(Controller.getTratamentoSelecionado().getCodigo()))); 
-            return true;
-        } else {
-            setTableModel(table, new ConsultaTableModel(new ArrayList()));
-            return false;
-        }
-    }
-    
-    public static boolean jTableMostraExames(JTable table) {
-        if(Controller.getConsultaSelecionada() != null) {
-            setTableModel(table, new ExameTableModel(ExameDAO.getInstance().retrieveByConsulta(Controller.getConsultaSelecionada().getCodigo()))); 
-            return true;
-        } else {
-            setTableModel(table, new ExameTableModel(new ArrayList()));
-            return false;
-        }
-    }
-    
-    public static boolean jTableMostraPagamentos(JTable table) {
-        if(Controller.getConsultaSelecionada() != null) {
-            setTableModel(table, new ExameTableModel(ExameDAO.getInstance().retrieveByConsulta(Controller.getConsultaSelecionada().getCodigo()))); 
-            return true;
-        } else {
-            setTableModel(table, new ExameTableModel(new ArrayList()));
-            return false;
-        }
-    }
-    
-    // Busca cliente no banco 
-    public static List<Object> buscarCliente(String nome) {
-        return ClienteDAO.getInstance().retrieveBySimilarName(nome);
-    }
 
-    // Atualiza a tabela com os clientes encontrados no banco
-    public static void atualizarBuscaCliente(JTable table, String nome) {
-        ((GenericTableModel)table.getModel()).addListOfItems(Controller.buscarCliente(nome));
-    }
-    
-    // Adiciona cliente ao banco
-    public static Cliente adicionarCliente(String nome, String endereco, String telefone, String email, String cpf) {
-        return ClienteDAO.getInstance().create(nome, endereco, telefone, email, cpf);
-    }
-    
-    // Recupera todos os clientes
-    public static List<Object> mostrarTodosClientes() {
-        return ClienteDAO.getInstance().retrieveAll();
-    }
-    
-    // Apaga cliente do banco
-    public static void deletarCliente(Cliente cliente) {
-        List<Animal> animais = AnimalDAO.getInstance().retrieveByCliente(cliente.getCodigo()); 
-        
-        for(Animal animal : animais) {
-           AnimalDAO.getInstance().delete(animal);
-        }
-        
-        ClienteDAO.getInstance().delete(cliente);
-    }
-    
-    // Adiciona animal ao banco relacionado ao cliente selecionado
     public static Animal adicionarAnimal(String nome, Integer classeAnimal, String especie, String raca, String sexo, Double peso) {
-        ClasseAnimal classe = ClasseAnimalDAO.getInstance().retrieveById(classeAnimal);
-        int cliente_id = getClienteSelecionado().getCodigo();
-        return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, cliente_id, classe.getCodigo());
+        return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, getClienteSelecionado().getCodigo(), classeAnimal);
     }
 
 //    public static Animal adicionarAnimal(String nome, String classeAnimal, String especie, String raca, String sexo, Double peso) {
@@ -188,42 +137,69 @@ public class Controller {
 //    }
     
     public static void deletarAnimal(Animal animal) {
-        //List<Animal> animais = AnimalDAO.getInstance().retrieveByCliente(cliente.getCodigo()); 
         AnimalDAO.getInstance().delete(animal);
     }
-    
-    // Busca veterinário no banco 
+
+    // Veterinário
+    public static boolean jTableMostraVets(JTable table) {
+        if(Controller.getAnimalSelecionado() != null) {
+            setTableModel(table, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveByEspecialidade(Controller.getAnimalSelecionado().getClasse_animal())));
+            return true;
+        } else {
+            setTableModel(table, new VeterinarioTableModel(new ArrayList()));
+            return false;
+        }
+    }
+
     public static List<Object> buscarVeterinario(String nome) {
         return VeterinarioDAO.getInstance().retrieveBySimilarName(nome);
     }
 
-    // Atualiza a tabela com os veterinário encontrados no banco
     public static void atualizarBuscaVeterinario(JTable table, String nome) {
         ((GenericTableModel)table.getModel()).addListOfItems(Controller.buscarVeterinario(nome));
     }
     
-    // Adiciona veterinário ao banco
-    public static Veterinario adicionarVeterinario(String nome, String endereco, String telefone, String especialidade, String periodo, String crmv) {
-        ClasseAnimal especialidadeVet = ClasseAnimalDAO.getInstance().retrieveByName(especialidade);
-        return VeterinarioDAO.getInstance().create(nome, endereco, telefone, crmv, especialidadeVet.getCodigo(), periodo);
+    public static Veterinario adicionarVeterinario(String nome, String endereco, String telefone, Integer especialidade, String periodo, String crmv) {
+        return VeterinarioDAO.getInstance().create(nome, endereco, telefone, crmv, especialidade, periodo);
     }
-    
-    // Recupera todos os clientes
+
+//    public static Veterinario adicionarVeterinario(String nome, String endereco, String telefone, String especialidade, String periodo, String crmv) {
+//        ClasseAnimal especialidadeVet = ClasseAnimalDAO.getInstance().retrieveByName(especialidade);
+//        return VeterinarioDAO.getInstance().create(nome, endereco, telefone, crmv, especialidadeVet.getCodigo(), periodo);
+//    }
+
     public static List<Object> mostrarTodosVets() {
         return VeterinarioDAO.getInstance().retrieveAll();
     }
     
-    // Apaga veterinário do banco. Precisa excluir mais entidades junto?
     public static void deletarVet(Veterinario veterinario) {
         VeterinarioDAO.getInstance().delete(veterinario);
     }
     
-    // Tratamento ?
+    // Tratamento
+    public static boolean jTableMostraTratamentos(JTable table) {
+        if(Controller.getAnimalSelecionado() != null) {
+            setTableModel(table, new TratamentoTableModel(TratamentoDAO.getInstance().retrieveByAnimal(Controller.getAnimalSelecionado().getCodigo())));
+            return true;
+        } else {
+            setTableModel(table, new TratamentoTableModel(new ArrayList()));
+            return false;
+        }
+    }
     
     
     // Consultas
-    //Deletar consulta: tem que deletar o pagamento e exames registrados
-    public static void deletarConsulta(Consulta consulta) {
+    public static boolean jTableMostraConsultas(JTable table) {
+        if(Controller.getTratamentoSelecionado() != null) {
+            setTableModel(table, new ConsultaTableModel(ConsultaDAO.getInstance().retrievebyTratamento(Controller.getTratamentoSelecionado().getCodigo())));
+            return true;
+        } else {
+            setTableModel(table, new ConsultaTableModel(new ArrayList()));
+            return false;
+        }
+    }
+
+    public static void deletarConsulta(Consulta consulta) { // Deleta os pagamentos e exames relacionados no banco
         List<Exame> exames = ExameDAO.getInstance().retrieveByConsulta(consulta.getCodigo());
        
         for(Exame exame : exames) {
@@ -240,9 +216,17 @@ public class Controller {
     }
     
     // Exames
+    public static boolean jTableMostraExames(JTable table) {
+        if(Controller.getConsultaSelecionada() != null) {
+            setTableModel(table, new ExameTableModel(ExameDAO.getInstance().retrieveByConsulta(Controller.getConsultaSelecionada().getCodigo())));
+            return true;
+        } else {
+            setTableModel(table, new ExameTableModel(new ArrayList()));
+            return false;
+        }
+    }
+
     public static Exame adicionarExame(String tipo, String dataSolicitacao, String status) {
-        //Consulta consulta = ConsultaDAO.getInstance().retrieveByName(classeAnimal);
-        //int cliente_id = getClienteSelecionado().getCodigo();
         return ExameDAO.getInstance().create(tipo, dataSolicitacao, status, consultaSelecionada.getCodigo()); // ? 
     }
     
@@ -251,9 +235,17 @@ public class Controller {
     }
     
     // Pagamentos
+    public static boolean jTableMostraPagamentos(JTable table) {
+        if(Controller.getConsultaSelecionada() != null) {
+            setTableModel(table, new ExameTableModel(ExameDAO.getInstance().retrieveByConsulta(Controller.getConsultaSelecionada().getCodigo())));
+            return true;
+        } else {
+            setTableModel(table, new ExameTableModel(new ArrayList()));
+            return false;
+        }
+    }
+
     public static Pagamento adicionarPagamento(Double valor, boolean consultaPaga) {
-        //Consulta consulta = ConsultaDAO.getInstance().retrieveByName(classeAnimal);
-        //int cliente_id = getClienteSelecionado().getCodigo();
         return PagamentoDAO.getInstance().create(valor, consultaPaga, consultaSelecionada.getCodigo()); // ? 
     }
     
@@ -261,16 +253,15 @@ public class Controller {
         PagamentoDAO.getInstance().delete(pagamento);
     }
 
+    // Criação das classes de animais no banco
     public static void criarClassesAnimais() {
         ClasseAnimalDAO classeAnimal = ClasseAnimalDAO.getInstance();
-        //String[] classesAnimais = {"Anfíbio", "Ave", "Mamífero", "Peixe", "Réptil"};
 
         classeAnimal.create("Anfíbio");
         classeAnimal.create("Ave");
         classeAnimal.create("Mamífero");
         classeAnimal.create("Peixe");
         classeAnimal.create("Réptil");
-
     }
 
     public static void printAllClasseAnimais() {
@@ -290,7 +281,6 @@ public class Controller {
             }
         }
     }
-
 
     public static void exibirAnimaisDoCliente(int clienteId) {
         // Buscar cliente pelo ID
@@ -316,6 +306,7 @@ public class Controller {
             System.out.println("Cliente não encontrado.");
         }
     }
+
     public static Animal adicionarAnimalParaCliente1() {
         String nome = "silvinho";
         String especie = "cachorro";
@@ -328,32 +319,5 @@ public class Controller {
         // Cria e retorna o animal
         return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, clienteId, classeAnimal);
     }
-    
-    public static Cliente getClienteSelecionado() {
-        return clienteSelecionado;
-    }
-    
-    public static Animal getAnimalSelecionado() {
-        return animalSelecionado;
-    }
-    
-    public static Veterinario getVeterinarioSelecionado() {
-        return vetSelecionado;
-    }
-    
-    public static Tratamento getTratamentoSelecionado() {
-        return tratamentoSelecionado;
-    }
-    
-    public static Consulta getConsultaSelecionada() {
-        return consultaSelecionada;
-    }
-    
-    public static Exame getExameSelecionado() {
-        return exameSelecionado;
-    }
-    
-    public static Pagamento getPagamentoSelecionado() {
-        return pagamentoSelecionado;
-    }
+
 }

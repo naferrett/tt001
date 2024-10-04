@@ -53,8 +53,7 @@ public class TratamentoTableModel extends GenericTableModel{
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
     }    
-    
-    
+
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Tratamento tratamento = (Tratamento) vDados.get(rowIndex);

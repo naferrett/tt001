@@ -5,12 +5,6 @@
 package view;
 
 import controller.Controller;
-import java.util.ArrayList;
-import javax.naming.ldap.Control;
-import javax.swing.JOptionPane;
-import model.dao.AnimalDAO;
-import model.dao.ClienteDAO;
-import model.dao.VeterinarioDAO;
 
 /**
  *
@@ -1049,7 +1043,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
-    // ?
+    // Remover
     private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
 //        Controller.jTableMostraClientes(jTable1);
 //        if (!Controller.jTableMostraAnimais(jTable2))
@@ -1124,14 +1118,14 @@ public class Principal extends javax.swing.JFrame {
     // Cadastra novo veterinários
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (jTable3.getModel() instanceof VeterinarioTableModel)
-            ((GenericTableModel)jTable3.getModel()).addItem(Controller.adicionarVeterinario("", "", "", "Ave", "", ""));
+            ((GenericTableModel)jTable3.getModel()).addItem(Controller.adicionarVeterinario("", "", "", 2, "", ""));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     // Deletar veterinário
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if(Controller.getVeterinarioSelecionado() != null) {
+        if(Controller.getVetSelecionado() != null) {
             ((VeterinarioTableModel)jTable3.getModel()).removeItem(jTable3.getSelectedRow());
-            Controller.deletarVet(Controller.getVeterinarioSelecionado());
+            Controller.deletarVet(Controller.getVetSelecionado());
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1160,10 +1154,9 @@ public class Principal extends javax.swing.JFrame {
          Controller.setSelecionado(((GenericTableModel) jTable6.getModel()).getItem(jTable6.getSelectedRow()));
     }//GEN-LAST:event_jTable6MousePressed
 
-    // como que é o date?
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        //if (jTable6.getModel() instanceof ExameTableModel)
-            //((GenericTableModel)jTable6.getModel()).addItem(Controller.adicionarExame("", 01/01/01, ""));
+        if (jTable6.getModel() instanceof ExameTableModel)
+            ((GenericTableModel)jTable6.getModel()).addItem(Controller.adicionarExame("", "01/01/01", ""));
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1194,10 +1187,8 @@ public class Principal extends javax.swing.JFrame {
     private void jTable10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable10MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable10MousePressed
-    
-    
-    
-    
+
+
     /**
      * @param args the command line arguments
      */

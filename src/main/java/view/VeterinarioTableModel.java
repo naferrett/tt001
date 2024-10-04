@@ -39,7 +39,6 @@ public class VeterinarioTableModel extends GenericTableModel {
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
     }
-    
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {

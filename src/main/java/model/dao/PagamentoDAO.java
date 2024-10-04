@@ -83,8 +83,8 @@ public class PagamentoDAO extends DAO {
     }
     
     // RetrieveByConsulta
-    public List<Pagamento> retrieveByConsulta(int idConsulta){
-        return this.retrieve("SELECT * FROM pagamento WHERE consulta_id = " + idConsulta);
+    public List<Pagamento> retrieveByConsulta(int consulta_id){
+        return this.retrieve("SELECT * FROM pagamento WHERE consulta_id = " + consulta_id);
     }
 
     // Update

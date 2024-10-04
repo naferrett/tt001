@@ -29,7 +29,6 @@ public class PagamentoTableModel extends GenericTableModel {
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
     }
-    
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -43,8 +42,7 @@ public class PagamentoTableModel extends GenericTableModel {
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
-    }    
-    
+    }
     
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {

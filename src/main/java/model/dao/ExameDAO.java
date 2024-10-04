@@ -86,8 +86,8 @@ public class ExameDAO extends DAO {
     }
     
     // RetrieveByConsulta
-    public List<Exame> retrieveByConsulta(int idConsulta){
-        return this.retrieve("SELECT * FROM exame WHERE consulta_id = " + idConsulta);
+    public List<Exame> retrieveByConsulta(int consulta_id){
+        return this.retrieve("SELECT * FROM exame WHERE consulta_id = " + consulta_id);
     }
 
     // Update
