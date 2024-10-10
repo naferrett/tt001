@@ -20,18 +20,20 @@ import model.dao.TratamentoDAO;
 public class TratamentoTableModel extends GenericTableModel{
         
     public TratamentoTableModel(List vDados){
-        super(vDados, new String[]{"Data de Início", "Data do Fim", "Descrição"});
+        super(vDados, new String[]{"Codigo", "Data de Início", "Data do Fim", "Descrição"});
     }
     
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return String.class;
+                return Integer.class;
             case 1:
                 return String.class;
             case 2:
-                return String.class;               
+                return String.class;
+            case 3:
+                return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -44,10 +46,12 @@ public class TratamentoTableModel extends GenericTableModel{
         
         switch (columnIndex) {
             case 0:
-                return tratamento.getDataInicio();
+                return tratamento.getCodigo();
             case 1:
-                return tratamento.getDataFim();
+                return tratamento.getDataInicio();
             case 2:
+                return tratamento.getDataFim();
+            case 3:
                 return tratamento.getDescricao();
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -60,12 +64,14 @@ public class TratamentoTableModel extends GenericTableModel{
         
         switch (columnIndex) {
             case 0:
-                tratamento.setDataInicio((String)aValue);
                 break;
             case 1:
-                tratamento.setDataFim((String)aValue);
+                tratamento.setDataInicio((String)aValue);
                 break;
             case 2:
+                tratamento.setDataFim((String)aValue);
+                break;
+            case 3:
                 tratamento.setDescricao((String)aValue);    
                 break;
             default:

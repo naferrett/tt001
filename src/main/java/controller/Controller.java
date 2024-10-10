@@ -30,7 +30,7 @@ public class Controller {
     @Getter
     private static Animal animalSelecionado = null;
     @Getter
-    private static Veterinario vetSelecionado = null;
+    public static Veterinario vetSelecionado = null;
     @Getter
     private static Tratamento tratamentoSelecionado = null;
     @Getter
@@ -190,6 +190,19 @@ public class Controller {
         }
     }
     
+    public static Tratamento adicionarTratamento(String dataIni, String dataFim, String descricao) {
+        return TratamentoDAO.getInstance().create(dataIni, dataFim, descricao, getAnimalSelecionado().getCodigo());
+    }
+    
+    public static void deletarTratamento(Tratamento tratamento) {
+        List<Consulta> consultas = ConsultaDAO.getInstance().retrievebyTratamento(tratamento.getCodigo());
+       
+        for(Consulta consulta : consultas) {
+           deletarConsulta(consulta);
+        }
+        
+        TratamentoDAO.getInstance().delete(tratamento);
+    }
     
     // Consultas
     public static boolean jTableMostraConsultas(JTable table) {
@@ -216,6 +229,25 @@ public class Controller {
         }
         
         ConsultaDAO.getInstance().delete(consulta);
+    }
+    
+    // Cadastra novo agendamento de consulta
+    public static void agendarConsulta(String data, int vetSelecionado, String status, Integer tratamentoId, String periodo, Double valor, String motivo, String observacoes, boolean pagamentoEfetuado) {
+        //preciso ver se já tem um veterinario com dia e horario 
+        List<Consulta> consultasComVetSelecionado = ConsultaDAO.getInstance().retrievebyVeterinario(vetSelecionado);
+        
+        for(Consulta consulta: consultasComVetSelecionado) {
+            if (consulta.getData() == data && consulta.getPeriodo() == periodo) {
+                //exibir mensagem de erro
+            }
+        }
+        
+        //tem que descobrir com pegar o tratamento
+        //posso colocar o código na tabela e pegar de acordo com o codigo
+        //TratamentoDAO.getInstance().re
+
+        ConsultaDAO.getInstance().create(data, periodo, vetSelecionado, status, motivo, observacoes, tratamentoId);
+        PagamentoDAO.getInstance().create(valor, pagamentoEfetuado, tratamentoId);
     }
     
     // Exames
