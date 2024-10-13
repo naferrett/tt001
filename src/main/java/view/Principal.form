@@ -1408,16 +1408,16 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jScrollPane11" pref="0" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jButton11" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane11" alignment="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
@@ -1452,7 +1452,12 @@
                                       <Table columnCount="3" rowCount="4">
                                         <Column editable="true" title="Valor" type="java.lang.Double"/>
                                         <Column editable="true" title="Data" type="java.lang.String"/>
-                                        <Column editable="true" title="Efetuado" type="java.lang.Boolean"/>
+                                        <Column editable="true" title="Efetuado" type="java.lang.Boolean">
+                                          <Data value="null"/>
+                                          <Data value="null"/>
+                                          <Data value="null"/>
+                                          <Data value="false"/>
+                                        </Column>
                                       </Table>
                                     </Property>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

@@ -58,6 +58,7 @@ public class PagamentoTableModel extends GenericTableModel {
                 break;
             case 1:
                 pagamentoConsulta.setDataPagamento((String)aValue);
+                break;
             case 2:
                 pagamentoConsulta.setConsultaPaga((Boolean)aValue);    
                 break;
