@@ -148,6 +148,7 @@ public abstract class DAO {
                     + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
                     + "valor DECIMAL(10,2), \n"
                     + "consulta_paga BOOLEAN, \n"
+                    + "data_pagamento VARCHAR(20), \n"
                     + "consulta_id INT, \n"
                     + "FOREIGN KEY (consulta_id) REFERENCES consulta(codigo)); \n");
             executeUpdate(stmt);

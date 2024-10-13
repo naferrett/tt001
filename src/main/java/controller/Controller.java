@@ -232,22 +232,18 @@ public class Controller {
     }
     
     // Cadastra novo agendamento de consulta
-    public static void agendarConsulta(String data, int vetSelecionado, String status, Integer tratamentoId, String periodo, Double valor, String motivo, String observacoes, boolean pagamentoEfetuado) {
-        //preciso ver se já tem um veterinario com dia e horario 
+    public static boolean agendarConsulta(String data, int vetSelecionado, String status, Integer tratamentoId, String periodo, Double valor, String dataPagamento, String motivo, String observacoes, boolean pagamentoEfetuado) {
         List<Consulta> consultasComVetSelecionado = ConsultaDAO.getInstance().retrievebyVeterinario(vetSelecionado);
         
         for(Consulta consulta: consultasComVetSelecionado) {
             if (consulta.getData() == data && consulta.getPeriodo() == periodo) {
-                //exibir mensagem de erro
+                return false;
             }
         }
-        
-        //tem que descobrir com pegar o tratamento
-        //posso colocar o código na tabela e pegar de acordo com o codigo
-        //TratamentoDAO.getInstance().re
 
         ConsultaDAO.getInstance().create(data, periodo, vetSelecionado, status, motivo, observacoes, tratamentoId);
-        PagamentoDAO.getInstance().create(valor, pagamentoEfetuado, tratamentoId);
+        PagamentoDAO.getInstance().create(valor, pagamentoEfetuado, dataPagamento, tratamentoId);
+        return true;
     }
     
     // Exames
@@ -272,16 +268,16 @@ public class Controller {
     // Pagamentos
     public static boolean jTableMostraPagamentos(JTable table) {
         if(Controller.getConsultaSelecionada() != null) {
-            setTableModel(table, new ExameTableModel(ExameDAO.getInstance().retrieveByConsulta(Controller.getConsultaSelecionada().getCodigo())));
+            setTableModel(table, new PagamentoTableModel(PagamentoDAO.getInstance().retrieveByConsulta(Controller.getConsultaSelecionada().getCodigo())));
             return true;
         } else {
-            setTableModel(table, new ExameTableModel(new ArrayList()));
+            setTableModel(table, new PagamentoTableModel(new ArrayList()));
             return false;
         }
     }
 
-    public static Pagamento adicionarPagamento(Double valor, boolean consultaPaga) {
-        return PagamentoDAO.getInstance().create(valor, consultaPaga, consultaSelecionada.getCodigo()); // ? 
+    public static Pagamento adicionarPagamento(Double valor, String dataPagamento, boolean consultaPaga) {
+        return PagamentoDAO.getInstance().create(valor, consultaPaga, dataPagamento, consultaSelecionada.getCodigo()); // ? 
     }
     
     public static void deletarPagamento(Pagamento pagamento) {
@@ -302,4 +298,12 @@ public class Controller {
         return "M";
     }
 
+    public static void criarClassesAnimais() {
+        ClasseAnimalDAO classeAnimal = ClasseAnimalDAO.getInstance();
+        classeAnimal.create("Anfíbio");
+        classeAnimal.create("Ave");
+        classeAnimal.create("Mamífero");
+        classeAnimal.create("Peixe");
+        classeAnimal.create("Réptil");
+    }
 }

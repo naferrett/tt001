@@ -24,13 +24,14 @@ public class PagamentoDAO extends DAO {
     }
 
     // CRUD
-    public Pagamento create(double valor, boolean consultaPaga, int consultaId) {
+    public Pagamento create(double valor, boolean consultaPaga, String dataPagamento, int consultaId) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO pagamento (valor, consulta_paga, consulta_id) VALUES (?,?,?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO pagamento (valor, consulta_paga, data_pagamento, consulta_id) VALUES (?,?,?,?)");
             stmt.setDouble(1, valor);
             stmt.setBoolean(2, consultaPaga);
-            stmt.setInt(3, consultaId);
+            stmt.setString(3, dataPagamento);
+            stmt.setInt(4, consultaId);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(PagamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,6 +46,7 @@ public class PagamentoDAO extends DAO {
             pagamento.setCodigo(rs.getInt("codigo"));
             pagamento.setValor(rs.getDouble("valor"));
             pagamento.setConsultaPaga(rs.getBoolean("consulta_paga"));
+            pagamento.setDataPagamento(rs.getString("data_pagamento"));
             pagamento.setConsulta_id(rs.getInt("consulta_id"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
@@ -91,11 +93,12 @@ public class PagamentoDAO extends DAO {
     public void update(Pagamento pagamento) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE pagamento SET valor=?, consulta_paga=?, consulta_id=? WHERE codigo=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE pagamento SET valor=?, consulta_paga=?, data_pagamento=?, consulta_id=? WHERE codigo=?");
             stmt.setDouble(1, pagamento.getValor());
             stmt.setBoolean(2, pagamento.isConsultaPaga());
-            stmt.setInt(3, pagamento.getConsulta_id());
-            stmt.setInt(4, pagamento.getCodigo());
+            stmt.setString(3, pagamento.getDataPagamento());
+            stmt.setInt(4, pagamento.getConsulta_id());
+            stmt.setInt(5, pagamento.getCodigo());
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
