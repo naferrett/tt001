@@ -241,8 +241,8 @@ public class Controller {
             }
         }
 
-        ConsultaDAO.getInstance().create(data, periodo, vetSelecionado, status, motivo, observacoes, tratamentoId);
-        PagamentoDAO.getInstance().create(valor, pagamentoEfetuado, dataPagamento, tratamentoId);
+        Consulta novaConsulta = ConsultaDAO.getInstance().create(data, periodo, vetSelecionado, status, motivo, observacoes, tratamentoId);
+        PagamentoDAO.getInstance().create(valor, pagamentoEfetuado, dataPagamento, novaConsulta.getCodigo());
         return true;
     }
     

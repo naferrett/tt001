@@ -1261,6 +1261,11 @@ public class Principal extends javax.swing.JFrame {
     private void jTable4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MousePressed
         Controller.setSelecionado(((GenericTableModel) jTable4.getModel()).getItem(jTable4.getSelectedRow()));
         Controller.jTableMostraConsultas(jTable5);
+
+        if(Controller.getTratamentoSelecionado() != null) {
+            Integer tratamentoId = Controller.getTratamentoSelecionado().getCodigo();
+            jTextField10.setText(tratamentoId.toString());
+        }
     }//GEN-LAST:event_jTable4MousePressed
 
     // Consultas    
