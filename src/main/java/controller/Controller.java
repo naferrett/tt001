@@ -143,13 +143,22 @@ public class Controller {
         AnimalDAO.getInstance().delete(animal);
     }
 
+    // Sexo do animal
+    public static String femeaSelecionado() {
+        return "F";
+    }
+
+    public static String machoSelecionado() {
+        return "M";
+    }
+
     // Veterinário
     public static boolean jTableMostraVets(JTable table) {
         if(Controller.getAnimalSelecionado() != null) {
             setTableModel(table, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveByEspecialidade(Controller.getAnimalSelecionado().getClasse_animal())));
             return true;
         } else {
-            setTableModel(table, new VeterinarioTableModel(new ArrayList()));
+            setTableModel(table, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAll()));
             return false;
         }
     }
@@ -203,7 +212,15 @@ public class Controller {
         
         TratamentoDAO.getInstance().delete(tratamento);
     }
-    
+
+    // Verificar se tratamento existe antes de agendar consulta
+    public static boolean tratamentoExiste(int codigoTratamento) {
+        if(TratamentoDAO.getInstance().retrieveById(codigoTratamento) == null) {
+            return false;
+        }
+        return true;
+    }
+
     // Consultas
     public static boolean jTableMostraConsultas(JTable table) {
         if(Controller.getTratamentoSelecionado() != null) {
@@ -236,7 +253,7 @@ public class Controller {
         List<Consulta> consultasComVetSelecionado = ConsultaDAO.getInstance().retrievebyVeterinario(vetSelecionado);
         
         for(Consulta consulta: consultasComVetSelecionado) {
-            if (consulta.getData() == data && consulta.getPeriodo() == periodo) {
+            if (consulta.getData().equals(data) && consulta.getPeriodo().equals(periodo)) {
                 return false;
             }
         }
@@ -288,15 +305,7 @@ public class Controller {
     public static void jTableMostraClasseAnimal(JTable table) {
         setTableModel(table, new ClasseAnimalTableModel(ClasseAnimalDAO.getInstance().retrieveAll()));
     }
-    
-    // Sexo do animal
-    public static String femeaSelecionado() {
-        return "F";
-    }
-    
-    public static String machoSelecionado() {
-        return "M";
-    }
+
 
     public static void criarClassesAnimais() {
         ClasseAnimalDAO classeAnimal = ClasseAnimalDAO.getInstance();

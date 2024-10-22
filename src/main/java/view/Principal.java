@@ -50,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
 
         Controller.jTableMostraClientes(jTable1);
         Controller.jTableMostraClasseAnimal(jTable10);
+        Controller.jTableMostraVets(jTable3);
         Controller.setTextFields(jTextField1, jTextField3, jTextField4, jTextField5);
     }
     /**
@@ -1147,13 +1148,10 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
-    // Remover
     private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
 //        Controller.jTableMostraClientes(jTable1);
 //        if (!Controller.jTableMostraAnimais(jTable2))
@@ -1207,6 +1205,13 @@ public class Principal extends javax.swing.JFrame {
     // Cadastrar novo animal
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (jTable2.getModel() instanceof AnimalTableModel)
+
+            if(Controller.getClasseAnimalSelecionada() == null|| !jRadioSexoMasculino.isSelected()|| jRadioSexoFeminino.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Por favor, selecione o sexo e a classe do animal antes de prosseguir.", "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
+                return;
+
+            }
+
             ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", "", generoSelecionado, 0.0));
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1217,7 +1222,21 @@ public class Principal extends javax.swing.JFrame {
             Controller.deletarAnimal(Controller.getAnimalSelecionado());
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-    
+
+    // Tabelas de seleção de classe
+    private void jTable10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable10MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable10.getModel()).getItem(jTable10.getSelectedRow()));
+    }//GEN-LAST:event_jTable10MousePressed
+
+    // Botões de seleção de sexo do animal
+    private void jRadioSexoFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoFemininoActionPerformed
+        generoSelecionado = Controller.femeaSelecionado();
+    }//GEN-LAST:event_jRadioSexoFemininoActionPerformed
+
+    private void jRadioSexoMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoMasculinoActionPerformed
+        generoSelecionado = Controller.machoSelecionado();
+    }//GEN-LAST:event_jRadioSexoMasculinoActionPerformed
+
     // Veterinário
     private void jTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MousePressed
         Controller.setSelecionado(((GenericTableModel) jTable3.getModel()).getItem(jTable3.getSelectedRow()));
@@ -1225,17 +1244,14 @@ public class Principal extends javax.swing.JFrame {
         atualizarPeriodoComboBox();
     }//GEN-LAST:event_jTable3MousePressed
 
+    //Busca do veterinário
     private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
         Controller.atualizarBuscaVeterinario(jTable3, jTextField6.getText());
     }//GEN-LAST:event_jTextField6KeyTyped
 
     // Mostra todos os veterinários
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if (Controller.getAnimalSelecionado() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione um animal na tabela antes de exibir os veterinários.", "Erro de Exibição", JOptionPane.ERROR_MESSAGE);
-        } else {
-            ((GenericTableModel)jTable3.getModel()).addListOfItems(Controller.mostrarTodosVets());
-        }
+        ((GenericTableModel)jTable3.getModel()).addListOfItems(Controller.mostrarTodosVets());
     }//GEN-LAST:event_jButton6ActionPerformed
 
     // Cadastra novo veterinários
@@ -1268,128 +1284,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable4MousePressed
 
-    // Consultas    
-    private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable5.getModel()).getItem(jTable5.getSelectedRow()));
-        Controller.jTableMostraExames(jTable6);
-        Controller.jTableMostraPagamentos(jTable8);
-    }//GEN-LAST:event_jTable5MousePressed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        if(Controller.getConsultaSelecionada() != null) {
-            ((ConsultaTableModel)jTable5.getModel()).removeItem(jTable5.getSelectedRow());
-            Controller.deletarConsulta(Controller.getConsultaSelecionada());
-        }
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    // Exames
-    private void jTable6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6MousePressed
-         Controller.setSelecionado(((GenericTableModel) jTable6.getModel()).getItem(jTable6.getSelectedRow()));
-    }//GEN-LAST:event_jTable6MousePressed
-
-    // Novo exame
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        if (Controller.getConsultaSelecionada() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione uma consulta antes de adicionar um exame.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
-        }
-        else {
-            if (jTable6.getModel() instanceof ExameTableModel)
-                ((GenericTableModel)jTable6.getModel()).addItem(Controller.adicionarExame("", "01/01/01", ""));
-        }
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        if(Controller.getExameSelecionado() != null) {
-            ((ExameTableModel)jTable6.getModel()).removeItem(jTable6.getSelectedRow());
-            Controller.deletarExame(Controller.getExameSelecionado());
-        }
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    
-    // Pagamento
-    private void jTable8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable8.getModel()).getItem(jTable8.getSelectedRow()));
-    }//GEN-LAST:event_jTable8MousePressed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if (Controller.getConsultaSelecionada() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione uma consulta antes de adicionar um pagamento.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (jTable8.getModel() instanceof PagamentoTableModel)
-                ((GenericTableModel)jTable8.getModel()).addItem(Controller.adicionarPagamento(0.0, "", false));
-        }
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if(Controller.getPagamentoSelecionado() != null) {
-            ((PagamentoTableModel)jTable8.getModel()).removeItem(jTable8.getSelectedRow());
-            Controller.deletarPagamento(Controller.getPagamentoSelecionado());
-        }
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    // Tabelas de seleção de classe
-    private void jTable10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable10MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable10.getModel()).getItem(jTable10.getSelectedRow()));
-    }//GEN-LAST:event_jTable10MousePressed
-
-    // Botões de seleção de sexo do animal
-    private void jRadioSexoFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoFemininoActionPerformed
-        generoSelecionado = Controller.femeaSelecionado();
-    }//GEN-LAST:event_jRadioSexoFemininoActionPerformed
-
-    private void jRadioSexoMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoMasculinoActionPerformed
-        generoSelecionado = Controller.machoSelecionado();
-    }//GEN-LAST:event_jRadioSexoMasculinoActionPerformed
-
-    // Agendar consulta
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        try {
-            Date dataConsultaSelecionada = jDateChooser1.getDate();
-            Date dataPagamentoSelecionada = jDateChooser2.getDate();
-            String status = jTextField9.getText();
-            String periodo = jTextField13.getText();
-            String motivo = jTextField12.getText();
-            String observacoes = jTextArea3.getText();
-            boolean pagamentoEfetuado = jCheckBox2.isSelected();
-
-            String tratamento = jTextField10.getText();
-            Integer tratamentoId = Integer.valueOf(tratamento);
-
-            String valorString = jTextField11.getText();
-            Double valor = Double.valueOf(valorString);
-
-            if (dataConsultaSelecionada == null || dataPagamentoSelecionada == null || status.isEmpty() || periodo.isEmpty() || valor.isNaN() || motivo.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
-            String dataConsulta = dateFormat.format(dataConsultaSelecionada);
-            String dataPagamento = dateFormat.format(dataPagamentoSelecionada);
-
-            if(!Controller.agendarConsulta(dataConsulta, Controller.getVetSelecionado().getCodigo(), status, tratamentoId, periodo, valor, dataPagamento, motivo, observacoes, pagamentoEfetuado)) {
-                JOptionPane.showMessageDialog(this, "O veterinário selecionado não possui disponibilidade na data selecionada. Por favor, escolha outra data, período, ou veterinário.", "Data Indisponível", JOptionPane.WARNING_MESSAGE);
-            }
-            
-            limparCamposConsulta();
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, insira um valor válido.", "Valor da Consulta Inválido", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    // Limpar campos do agendamento
-    private void limparCamposConsulta() {
-        jDateChooser1.setDate(null);
-        jDateChooser2.setDate(null);
-        jTextField9.setText("");
-        jTextField10.setText("");
-        jTextField13.setText("");
-        jTextField11.setText("");
-        jTextField12.setText("");
-        jTextArea3.setText("");
-        jCheckBox2.setSelected(false);
-    }
-    
     // Novo tratamento
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         if (Controller.getAnimalSelecionado() == null) {
@@ -1408,6 +1302,59 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton17ActionPerformed
 
+    // Consultas    
+    private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable5.getModel()).getItem(jTable5.getSelectedRow()));
+        Controller.jTableMostraExames(jTable6);
+        Controller.jTableMostraPagamentos(jTable8);
+    }//GEN-LAST:event_jTable5MousePressed
+
+    // Agendar consulta
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        try {
+            Date dataConsultaSelecionada = jDateChooser1.getDate();
+            Date dataPagamentoSelecionada = jDateChooser2.getDate();
+            String status = jTextField9.getText();
+            String periodo = jTextField13.getText();
+            String motivo = jTextField12.getText();
+            String observacoes = jTextArea3.getText();
+            boolean pagamentoEfetuado = jCheckBox2.isSelected();
+
+            String tratamento = jTextField10.getText();
+            Integer tratamentoId = Integer.valueOf(tratamento);
+
+            if(!Controller.tratamentoExiste(tratamentoId)) {
+                JOptionPane.showMessageDialog(this, "Por favor, insira um tratamento existente.", "Tratamento Não Existe", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String valorString = jTextField11.getText().replace(",", ".");
+            Double valor = Double.valueOf(valorString);
+            if (valor <= 0) {
+                JOptionPane.showMessageDialog(this, "O valor da consulta deve ser maior do que zero.", "Campos Incompletos", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (dataConsultaSelecionada == null || dataPagamentoSelecionada == null || status.isEmpty() || periodo.isEmpty() || valor.isNaN() || motivo.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String dataConsulta = dateFormat.format(dataConsultaSelecionada);
+            String dataPagamento = dateFormat.format(dataPagamentoSelecionada);
+
+            if(!Controller.agendarConsulta(dataConsulta, Controller.getVetSelecionado().getCodigo(), status, tratamentoId, periodo, valor, dataPagamento, motivo, observacoes, pagamentoEfetuado)) {
+                JOptionPane.showMessageDialog(this, "O veterinário selecionado não possui disponibilidade na data selecionada. Por favor, escolha outra data, período, ou veterinário.", "Data Indisponível", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            limparCamposConsulta();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira um valor válido.", "Valor da Consulta Inválido", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     // combo box
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String periodoSelecionado = (String) jComboBox1.getSelectedItem();
@@ -1416,7 +1363,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Pagamento efetuado
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        
+
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -1440,9 +1387,75 @@ public class Principal extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(periodos.toArray(new String[0])));
         jTextField13.setText("");
-    }    
-    
-    
+    }
+
+    // Limpar campos do agendamento
+    private void limparCamposConsulta() {
+        jDateChooser1.setDate(null);
+        jDateChooser2.setDate(null);
+        jTextField9.setText("");
+        jTextField10.setText("");
+        jTextField13.setText("");
+        jTextField11.setText("");
+        jTextField12.setText("");
+        jTextArea3.setText("");
+        jCheckBox2.setSelected(false);
+    }
+
+    // Deletar consulta
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        if(Controller.getConsultaSelecionada() != null) {
+            ((ConsultaTableModel)jTable5.getModel()).removeItem(jTable5.getSelectedRow());
+            Controller.deletarConsulta(Controller.getConsultaSelecionada());
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    // Exames
+    private void jTable6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6MousePressed
+         Controller.setSelecionado(((GenericTableModel) jTable6.getModel()).getItem(jTable6.getSelectedRow()));
+    }//GEN-LAST:event_jTable6MousePressed
+
+    // Novo exame
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        if (Controller.getConsultaSelecionada() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma consulta antes de adicionar um exame.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            if (jTable6.getModel() instanceof ExameTableModel)
+                ((GenericTableModel)jTable6.getModel()).addItem(Controller.adicionarExame("", "01/01/01", ""));
+        }
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    // Deletar exame
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        if(Controller.getExameSelecionado() != null) {
+            ((ExameTableModel)jTable6.getModel()).removeItem(jTable6.getSelectedRow());
+            Controller.deletarExame(Controller.getExameSelecionado());
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    // Pagamento
+    private void jTable8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable8.getModel()).getItem(jTable8.getSelectedRow()));
+    }//GEN-LAST:event_jTable8MousePressed
+
+    // Adicionar um novo pagamento para uma consulta
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        if (Controller.getConsultaSelecionada() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma consulta antes de adicionar um pagamento.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (jTable8.getModel() instanceof PagamentoTableModel)
+                ((GenericTableModel)jTable8.getModel()).addItem(Controller.adicionarPagamento(0.0, "", false));
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    // Deletar um pagamento de uma consulta
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if(Controller.getPagamentoSelecionado() != null) {
+            ((PagamentoTableModel)jTable8.getModel()).removeItem(jTable8.getSelectedRow());
+            Controller.deletarPagamento(Controller.getPagamentoSelecionado());
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
