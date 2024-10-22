@@ -29,6 +29,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void myInitComponents() {
+        this.setTitle("Clínica Veterinária");
+        this.setLocationRelativeTo(null);
+
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
