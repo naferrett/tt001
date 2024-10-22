@@ -388,9 +388,9 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioSexoMasculino, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioSexoFeminino, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jRadioSexoFeminino, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 204, Short.MAX_VALUE))))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1204,15 +1204,16 @@ public class Principal extends javax.swing.JFrame {
 
     // Cadastrar novo animal
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (jTable2.getModel() instanceof AnimalTableModel)
-
-            if(Controller.getClasseAnimalSelecionada() == null|| !jRadioSexoMasculino.isSelected()|| jRadioSexoFeminino.isSelected()) {
-                JOptionPane.showMessageDialog(this, "Por favor, selecione o sexo e a classe do animal antes de prosseguir.", "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
-                return;
-
-            }
-
-            ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", "", generoSelecionado, 0.0));
+        if(Controller.getClienteSelecionado() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um cliente antes de prosseguir.", "Cliente Não Selecionado", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // arrumar verificacao
+        if(Controller.getClasseAnimalSelecionada() == null || generoSelecionado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione o sexo e a classe do animal antes de prosseguir.", "Erro de cadastro.", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", "", generoSelecionado, 0.0));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     // Deletar animal
@@ -1331,12 +1332,12 @@ public class Principal extends javax.swing.JFrame {
             String valorString = jTextField11.getText().replace(",", ".");
             Double valor = Double.valueOf(valorString);
             if (valor <= 0) {
-                JOptionPane.showMessageDialog(this, "O valor da consulta deve ser maior do que zero.", "Campos Incompletos", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "O valor da consulta deve ser maior do que zero.", "Valor da Consulta Inválido", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             if (dataConsultaSelecionada == null || dataPagamentoSelecionada == null || status.isEmpty() || periodo.isEmpty() || valor.isNaN() || motivo.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Campos Incompletos", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -1345,7 +1346,7 @@ public class Principal extends javax.swing.JFrame {
             String dataPagamento = dateFormat.format(dataPagamentoSelecionada);
 
             if(!Controller.agendarConsulta(dataConsulta, Controller.getVetSelecionado().getCodigo(), status, tratamentoId, periodo, valor, dataPagamento, motivo, observacoes, pagamentoEfetuado)) {
-                JOptionPane.showMessageDialog(this, "O veterinário selecionado não possui disponibilidade na data selecionada. Por favor, escolha outra data, período, ou veterinário.", "Data Indisponível", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "O veterinário selecionado não possui disponibilidade na data selecionada. Por favor, escolha outra data, período, ou veterinário.", "Data Indisponível", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
