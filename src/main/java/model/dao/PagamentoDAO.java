@@ -24,14 +24,15 @@ public class PagamentoDAO extends DAO {
     }
 
     // CRUD
-    public Pagamento create(double valor, boolean consultaPaga, String dataPagamento, int consultaId) {
+    public Pagamento create(double valor, double valorPago, boolean consultaPaga, String dataPagamento, int consultaId) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO pagamento (valor, consulta_paga, data_pagamento, consulta_id) VALUES (?,?,?,?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO pagamento (valor, valor_pago, consulta_paga, data_pagamento, consulta_id) VALUES (?,?,?,?,?)");
             stmt.setDouble(1, valor);
-            stmt.setBoolean(2, consultaPaga);
-            stmt.setString(3, dataPagamento);
-            stmt.setInt(4, consultaId);
+            stmt.setDouble(2, valorPago);
+            stmt.setBoolean(3, consultaPaga);
+            stmt.setString(4, dataPagamento);
+            stmt.setInt(5, consultaId);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(PagamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,6 +46,7 @@ public class PagamentoDAO extends DAO {
             pagamento = new Pagamento();
             pagamento.setCodigo(rs.getInt("codigo"));
             pagamento.setValor(rs.getDouble("valor"));
+            pagamento.setValorPago(rs.getDouble("valor_pago"));
             pagamento.setConsultaPaga(rs.getBoolean("consulta_paga"));
             pagamento.setDataPagamento(rs.getString("data_pagamento"));
             pagamento.setConsulta_id(rs.getInt("consulta_id"));
@@ -68,16 +70,6 @@ public class PagamentoDAO extends DAO {
         return pagamentos;
     }
 
-    // RetrieveAll
-    public List<Pagamento> retrieveAll() {
-        return this.retrieve("SELECT * FROM pagamento");
-    }
-
-    // RetrieveLast
-    public List<Pagamento> retrieveLast(){
-        return this.retrieve("SELECT * FROM pagamento WHERE codigo = " + lastId("pagamento","codigo"));
-    }
-
     // RetrieveById
     public Pagamento retrieveById(int id) {
         List<Pagamento> pagamentos = this.retrieve("SELECT * FROM pagamento WHERE codigo = " + id);
@@ -93,12 +85,13 @@ public class PagamentoDAO extends DAO {
     public void update(Pagamento pagamento) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE pagamento SET valor=?, consulta_paga=?, data_pagamento=?, consulta_id=? WHERE codigo=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE pagamento SET valor=?, valor_pago=?, consulta_paga=?, data_pagamento=?, consulta_id=? WHERE codigo=?");
             stmt.setDouble(1, pagamento.getValor());
-            stmt.setBoolean(2, pagamento.isConsultaPaga());
-            stmt.setString(3, pagamento.getDataPagamento());
-            stmt.setInt(4, pagamento.getConsulta_id());
-            stmt.setInt(5, pagamento.getCodigo());
+            stmt.setDouble(2, pagamento.getValorPago());
+            stmt.setBoolean(3, pagamento.isConsultaPaga());
+            stmt.setString(4, pagamento.getDataPagamento());
+            stmt.setInt(5, pagamento.getConsulta_id());
+            stmt.setInt(6, pagamento.getCodigo());
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());

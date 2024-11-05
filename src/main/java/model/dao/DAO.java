@@ -138,6 +138,7 @@ public abstract class DAO {
                     + "status VARCHAR(50), \n"
                     + "motivo VARCHAR(300), \n"
                     + "observacoes TEXT, \n"
+                    + "resultados TEXT, \n"
                     + "tratamento_id INT, \n"
                     + "FOREIGN KEY (veterinario_id) REFERENCES veterinario(codigo), \n"
                     + "FOREIGN KEY (tratamento_id) REFERENCES tratamento(codigo)); \n");
@@ -147,6 +148,7 @@ public abstract class DAO {
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS pagamento( \n"
                     + "codigo INT PRIMARY KEY AUTO_INCREMENT, \n"
                     + "valor DECIMAL(10,2), \n"
+                    + "valor_pago DECIMAL(10,2), \n"
                     + "consulta_paga BOOLEAN, \n"
                     + "data_pagamento VARCHAR(20), \n"
                     + "consulta_id INT, \n"

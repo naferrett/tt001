@@ -21,7 +21,7 @@ import model.dao.VeterinarioDAO;
 public class ConsultaTableModel extends GenericTableModel{
         
     public ConsultaTableModel(List vDados){
-        super(vDados, new String[]{"Data", "Periodo", "Veterinário", "Status", "Motivo", "Observação"});
+        super(vDados, new String[]{"Data", "Periodo", "Veterinário", "Status", "Motivo", "Observação", "Resultados"});
     }
     
     @Override
@@ -38,6 +38,8 @@ public class ConsultaTableModel extends GenericTableModel{
             case 4:
                 return String.class;
             case 5:
+                return String.class;
+            case 6:
                 return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -65,6 +67,8 @@ public class ConsultaTableModel extends GenericTableModel{
                 return consultasTratamento.getMotivo();
             case 5:
                 return consultasTratamento.getObservacoes();
+            case 6:
+                return consultasTratamento.getResultados();
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -93,6 +97,9 @@ public class ConsultaTableModel extends GenericTableModel{
                 break;
             case 5:
                 consultasTratamento.setObservacoes((String)aValue);
+                break;
+            case 6:
+                consultasTratamento.setResultados((String)aValue);
                 break;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");

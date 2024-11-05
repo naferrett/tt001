@@ -69,16 +69,6 @@ public class ExameDAO extends DAO {
         return exames;
     }
 
-    // RetrieveAll
-    public List<Exame> retrieveAll() {
-        return this.retrieve("SELECT * FROM exame");
-    }
-
-    // RetrieveLast
-    public List<Exame> retrieveLast(){
-        return this.retrieve("SELECT * FROM exame WHERE codigo = " + lastId("exame","codigo"));
-    }
-
     // RetrieveById
     public Exame retrieveById(int id) {
         List<Exame> exames = this.retrieve("SELECT * FROM exame WHERE codigo = " + id);

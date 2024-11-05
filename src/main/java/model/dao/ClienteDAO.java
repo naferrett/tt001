@@ -74,11 +74,6 @@ public class ClienteDAO extends DAO {
         return this.retrieve("SELECT * FROM cliente");
     }
 
-    // RetrieveLast
-    public List retrieveLast(){
-        return this.retrieve("SELECT * FROM cliene WHERE codigo = " + lastId("cliente","codigo"));
-    }
-
     // RetrieveById
     public Cliente retrieveById(int id) {
         List<Cliente> clientes = this.retrieve("SELECT * FROM cliente WHERE codigo = " + id);

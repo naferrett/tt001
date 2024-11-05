@@ -71,11 +71,6 @@ public class ClasseAnimalDAO extends DAO {
         return this.retrieve("SELECT * FROM classe_animal");
     }
 
-    // RetrieveLast
-    public List<ClasseAnimal> retrieveLast(){
-        return this.retrieve("SELECT * FROM classe_animal WHERE codigo = " + lastId("classe_animal","codigo"));
-    }
-
     // RetrieveById
     public ClasseAnimal retrieveById(int id) {
         List<ClasseAnimal> classeAnimais = this.retrieve("SELECT * FROM classe_animal WHERE codigo = " + id);
@@ -85,12 +80,6 @@ public class ClasseAnimalDAO extends DAO {
     // RetrieveByName
     public ClasseAnimal retrieveByName(String nomeClasse) {
         List<ClasseAnimal> classeAnimais = this.retrieve("SELECT * FROM classe_animal WHERE nome_classe = '" + nomeClasse + "'");
-        return (classeAnimais.isEmpty()?null:classeAnimais.get(0));
-    }
-
-    // RetrieveBySimilarName
-    public ClasseAnimal retrieveBySimilarName(String nomeClasse) {
-        List<ClasseAnimal> classeAnimais = this.retrieve("SELECT * FROM classe_animal WHERE nome_classe LIKE '%" + nomeClasse + "%'");
         return (classeAnimais.isEmpty()?null:classeAnimais.get(0));
     }
 
@@ -106,17 +95,6 @@ public class ClasseAnimalDAO extends DAO {
             System.err.println("Exception: " + e.getMessage());
         }
     }
-
-    // DeleteAll
-    public void deleteAll() {
-        try {
-            PreparedStatement stmt = DAO.getConnection().prepareStatement("DELETE FROM classe_animal WHERE codigo >= 1");
-            executeUpdate(stmt);
-        } catch (SQLException e) {
-            System.err.println("Exception: " + e.getMessage());
-        }
-    }
-
 
     // Delete
     public void delete(ClasseAnimal classeAnimal) {

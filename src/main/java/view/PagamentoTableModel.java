@@ -15,7 +15,7 @@ import model.dao.PagamentoDAO;
 public class PagamentoTableModel extends GenericTableModel {
         
     public PagamentoTableModel(List vDados){
-        super(vDados, new String[]{"Valor", "Data", "Efetuado"});
+        super(vDados, new String[]{"Valor", "Valor Pago", "Data", "Efetuado"});
     }
     
     @Override
@@ -23,9 +23,11 @@ public class PagamentoTableModel extends GenericTableModel {
         switch (columnIndex) {
             case 0:
                 return Double.class;
-            case 1:   
-                return String.class;
+            case 1:
+                return Double.class;
             case 2:
+                return String.class;
+            case 3:
                 return Boolean.class;                
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -40,8 +42,10 @@ public class PagamentoTableModel extends GenericTableModel {
             case 0:
                 return pagamentoConsulta.getValor();
             case 1:
-                return pagamentoConsulta.getDataPagamento();
+                return pagamentoConsulta.getValorPago();
             case 2:
+                return pagamentoConsulta.getDataPagamento();
+            case 3:
                 return pagamentoConsulta.isConsultaPaga();    
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -57,9 +61,12 @@ public class PagamentoTableModel extends GenericTableModel {
                 pagamentoConsulta.setValor((Double)aValue);
                 break;
             case 1:
-                pagamentoConsulta.setDataPagamento((String)aValue);
+                pagamentoConsulta.setValorPago((Double)aValue);
                 break;
             case 2:
+                pagamentoConsulta.setDataPagamento((String)aValue);
+                break;
+            case 3:
                 pagamentoConsulta.setConsultaPaga((Boolean)aValue);    
                 break;
             default:

@@ -69,16 +69,6 @@ public class TratamentoDAO extends DAO {
         return tratamentos;
     }
 
-    // RetrieveAll
-    public List<Tratamento> retrieveAll() {
-        return this.retrieve("SELECT * FROM tratamento");
-    }
-
-    // RetrieveLast
-    public List<Tratamento> retrieveLast(){
-        return this.retrieve("SELECT * FROM tratamento WHERE codigo = " + lastId("tratamento","codigo"));
-    }
-
     // RetrieveById
     public Tratamento retrieveById(int id) {
         List<Tratamento> tratamentos = this.retrieve("SELECT * FROM tratamento WHERE codigo = " + id);

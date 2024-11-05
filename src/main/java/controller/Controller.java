@@ -112,7 +112,7 @@ public class Controller {
         List<Animal> animais = AnimalDAO.getInstance().retrieveByCliente(cliente.getCodigo()); 
         
         for(Animal animal : animais) { // Deletar um cliente inclui deletar todos os animais relacionados a ele no banco
-           AnimalDAO.getInstance().delete(animal);
+           deletarAnimal(animal);
         }
         
         ClienteDAO.getInstance().delete(cliente);
@@ -132,14 +132,14 @@ public class Controller {
     public static Animal adicionarAnimal(String nome, String classeAnimal, String especie, String raca, String sexo, Double peso) {
         return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, getClienteSelecionado().getCodigo(), getClasseAnimalSelecionada().getCodigo());
     }
-
-//    public static Animal adicionarAnimal(String nome, String classeAnimal, String especie, String raca, String sexo, Double peso) {
-//        ClasseAnimal classe = ClasseAnimalDAO.getInstance().retrieveByName(classeAnimal);
-//        int cliente_id = getClienteSelecionado().getCodigo();
-//        return AnimalDAO.getInstance().create(nome, especie, raca, sexo, peso, cliente_id, classe.getCodigo());
-//    }
     
     public static void deletarAnimal(Animal animal) {
+        List<Tratamento> tratamentos = TratamentoDAO.getInstance().retrieveByAnimal(animal.getCodigo());
+        
+        for(Tratamento tratamento : tratamentos) { 
+           deletarTratamento(tratamento);
+        }
+        
         AnimalDAO.getInstance().delete(animal);
     }
 
@@ -174,11 +174,6 @@ public class Controller {
     public static Veterinario adicionarVeterinario(String nome, String endereco, String telefone, String especialidade, String periodo, String crmv) {
         return VeterinarioDAO.getInstance().create(nome, endereco, telefone, crmv, getClasseAnimalSelecionada().getCodigo(), periodo);
     }
-
-//    public static Veterinario adicionarVeterinario(String nome, String endereco, String telefone, String especialidade, String periodo, String crmv) {
-//        ClasseAnimal especialidadeVet = ClasseAnimalDAO.getInstance().retrieveByName(especialidade);
-//        return VeterinarioDAO.getInstance().create(nome, endereco, telefone, crmv, especialidadeVet.getCodigo(), periodo);
-//    }
 
     public static List<Object> mostrarTodosVets() {
         return VeterinarioDAO.getInstance().retrieveAll();
@@ -249,7 +244,7 @@ public class Controller {
     }
     
     // Cadastra novo agendamento de consulta
-    public static boolean agendarConsulta(String data, int vetSelecionado, String status, Integer tratamentoId, String periodo, Double valor, String dataPagamento, String motivo, String observacoes, boolean pagamentoEfetuado) {
+    public static boolean agendarConsulta(String data, int vetSelecionado, String status, Integer tratamentoId, String periodo, Double valor, Double valorPago, String dataPagamento, String motivo, String observacoes, boolean pagamentoEfetuado) {
         List<Consulta> consultasComVetSelecionado = ConsultaDAO.getInstance().retrievebyVeterinario(vetSelecionado);
         
         for(Consulta consulta: consultasComVetSelecionado) {
@@ -257,9 +252,10 @@ public class Controller {
                 return false;
             }
         }
-
-        Consulta novaConsulta = ConsultaDAO.getInstance().create(data, periodo, vetSelecionado, status, motivo, observacoes, tratamentoId);
-        PagamentoDAO.getInstance().create(valor, pagamentoEfetuado, dataPagamento, novaConsulta.getCodigo());
+        
+        String resultados = "";
+        Consulta novaConsulta = ConsultaDAO.getInstance().create(data, periodo, vetSelecionado, status, motivo, observacoes, resultados, tratamentoId);
+        PagamentoDAO.getInstance().create(valor, valorPago, pagamentoEfetuado, dataPagamento, novaConsulta.getCodigo());
         return true;
     }
     
@@ -293,8 +289,8 @@ public class Controller {
         }
     }
 
-    public static Pagamento adicionarPagamento(Double valor, String dataPagamento, boolean consultaPaga) {
-        return PagamentoDAO.getInstance().create(valor, consultaPaga, dataPagamento, consultaSelecionada.getCodigo()); // ? 
+    public static Pagamento adicionarPagamento(Double valor, Double valorPago, String dataPagamento, boolean consultaPaga) {
+        return PagamentoDAO.getInstance().create(valor, valorPago, consultaPaga, dataPagamento, consultaSelecionada.getCodigo());
     }
     
     public static void deletarPagamento(Pagamento pagamento) {

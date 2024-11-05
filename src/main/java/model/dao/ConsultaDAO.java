@@ -25,17 +25,18 @@ public class ConsultaDAO extends DAO {
     }
 
     // CRUD
-    public Consulta create(String data, String periodo, int veterinarioId, String status, String motivo, String observacoes, int tratamentoId) {
+    public Consulta create(String data, String periodo, int veterinarioId, String status, String motivo, String observacoes, String resultados, int tratamentoId) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO consulta (data, periodo, veterinario_id, status, motivo, observacoes, tratamento_id) VALUES (?,?,?,?,?,?,?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO consulta (data, periodo, veterinario_id, status, motivo, observacoes, resultados, tratamento_id) VALUES (?,?,?,?,?,?,?,?)");
             stmt.setString(1, data);
             stmt.setString(2, periodo);
             stmt.setInt(3, veterinarioId);
             stmt.setString(4, status);
             stmt.setString(5, motivo);
             stmt.setString(6, observacoes);
-            stmt.setInt(7, tratamentoId);
+            stmt.setString(7, resultados);
+            stmt.setInt(8, tratamentoId);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,6 +55,7 @@ public class ConsultaDAO extends DAO {
             consulta.setStatus(rs.getString("status"));
             consulta.setMotivo(rs.getString("motivo"));
             consulta.setObservacoes(rs.getString("observacoes"));
+            consulta.setResultados(rs.getString("resultados"));
             consulta.setTratamento_id(rs.getInt("tratamento_id"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
@@ -73,16 +75,6 @@ public class ConsultaDAO extends DAO {
             System.err.println("Exception: " + e.getMessage());
         }
         return consultas;
-    }
-
-    // RetrieveAll
-    public List<Consulta> retrieveAll() {
-        return this.retrieve("SELECT * FROM consulta");
-    }
-
-    // RetrieveLast
-    public List<Consulta> retrieveLast(){
-        return this.retrieve("SELECT * FROM consulta WHERE codigo = " + lastId("consulta","codigo"));
     }
 
     // RetrieveById
@@ -105,15 +97,16 @@ public class ConsultaDAO extends DAO {
     public void update(Consulta consulta) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE consulta SET data=?, periodo=?, veterinario_id=?, status=?, motivo=?, observacoes=?, tratamento_id=? WHERE codigo=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE consulta SET data=?, periodo=?, veterinario_id=?, status=?, motivo=?, observacoes=?, resultados=?, tratamento_id=? WHERE codigo=?");
             stmt.setString(1, consulta.getData());
             stmt.setString(2, consulta.getPeriodo());
             stmt.setInt(3, consulta.getVeterinario_id());
             stmt.setString(4, consulta.getStatus());
             stmt.setString(5, consulta.getMotivo());
             stmt.setString(6, consulta.getObservacoes());
-            stmt.setInt(7, consulta.getTratamento_id());
-            stmt.setInt(8, consulta.getCodigo());
+            stmt.setString(7, consulta.getResultados());
+            stmt.setInt(8, consulta.getTratamento_id());
+            stmt.setInt(9, consulta.getCodigo());
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());

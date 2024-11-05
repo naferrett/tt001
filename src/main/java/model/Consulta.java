@@ -13,6 +13,7 @@ public class Consulta {
     private String motivo;
     private String status;
     private String observacoes;
+    private String resultados;
     private int tratamento_id;
     private List<Exame> exames;
 }

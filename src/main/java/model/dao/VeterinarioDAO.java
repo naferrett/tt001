@@ -78,11 +78,6 @@ public class VeterinarioDAO extends DAO {
         return this.retrieve("SELECT * FROM veterinario");
     }
 
-    // RetrieveLast
-    public List<Veterinario> retrieveLast(){
-        return this.retrieve("SELECT * FROM veterinario WHERE codigo = " + lastId("veterinario","codigo"));
-    }
-
     // RetrieveById
     public Veterinario retrieveById(int id) {
         List<Veterinario> veterinarios = this.retrieve("SELECT * FROM veterinario WHERE codigo = " + id);

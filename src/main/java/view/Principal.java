@@ -38,6 +38,7 @@ public class Principal extends javax.swing.JFrame {
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
+        jTextField7.setText("");
         jDateChooser1.setDate(null);
         jDateChooser2.setDate(null);
         jTextField8.setText("");
@@ -134,13 +135,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
-        jButton14 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
@@ -151,11 +155,10 @@ public class Principal extends javax.swing.JFrame {
         jTable8 = new javax.swing.JTable();
         jButton11 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jPanel14 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jButton14 = new javax.swing.JButton();
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -337,7 +340,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jTable2);
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a Classe e/ou Sexo"));
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a Classe e Sexo"));
 
         jTable10.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -362,7 +365,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane12.setViewportView(jTable10);
 
-        jLabel15.setText("Selecione o Gênero:");
+        jLabel15.setText("Selecione o Sexo:");
 
         jRadioSexoFeminino.setText("Fêmea");
         jRadioSexoFeminino.addActionListener(new java.awt.event.ActionListener() {
@@ -619,6 +622,10 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel16.setText("Data do pagamento:");
 
+        jLabel17.setText("Valor pago:");
+
+        jTextField7.setText("jTextField7");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -667,7 +674,11 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField11))
+                        .addComponent(jTextField11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -682,7 +693,9 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField11))
+                        .addComponent(jTextField11)
+                        .addComponent(jLabel17)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -691,7 +704,8 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
                         .addGap(12, 12, 12)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
@@ -699,31 +713,25 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jLabel12)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton9)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCheckBox2))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox2))
+                    .addComponent(jButton9))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -750,199 +758,15 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalhes do Tratamento"));
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultas do Tratamento"));
-
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Data", "Período", "Veterinário", "Status", "Motivo", "Observação"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable5MousePressed(evt);
-            }
-        });
-        jScrollPane9.setViewportView(jTable5);
-
-        jButton14.setText("Deletar Consulta");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jButton14)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jButton14)
-                .addContainerGap())
-        );
-
-        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Exames"));
-
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Tipo", "Data de Solicitação", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable6MousePressed(evt);
-            }
-        });
-        jScrollPane10.setViewportView(jTable6);
-
-        jButton12.setText("Novo Exame");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-
-        jButton13.setText("Deletar Exame");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton13)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13))
-                .addContainerGap())
-        );
-
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Pagamento"));
-
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null,  new Boolean(false)}
-            },
-            new String [] {
-                "Valor", "Data", "Efetuado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable8MousePressed(evt);
-            }
-        });
-        jScrollPane11.setViewportView(jTable8);
-
-        jButton11.setText("Deletar Pagamento");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setText("Novo Pagamento");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jButton10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton11)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton11)
-                    .addComponent(jButton10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 163, Short.MAX_VALUE)
         );
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Tratamento"));
@@ -1001,7 +825,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jButton16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1012,35 +836,206 @@ public class Principal extends javax.swing.JFrame {
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton16)
                     .addComponent(jButton17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Exames"));
+
+        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Tipo", "Data de Solicitação", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable6MousePressed(evt);
+            }
+        });
+        jScrollPane10.setViewportView(jTable6);
+
+        jButton12.setText("Novo Exame");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        jButton13.setText("Deletar Exame");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton13)
+                        .addGap(0, 135, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton13)
+                    .addComponent(jButton12))
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Pagamento"));
+
+        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null,  new Boolean(false)}
+            },
+            new String [] {
+                "Valor", "Valor Pago", "Data", "Efetuado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable8MousePressed(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jTable8);
+
+        jButton11.setText("Deletar Pagamento");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("Novo Pagamento");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jButton10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton11)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18))
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton10)
+                    .addComponent(jButton11))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultas do Tratamento"));
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Data", "Período", "Veterinário", "Status", "Motivo", "Observação", "Resultados"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable5MousePressed(evt);
+            }
+        });
+        jScrollPane9.setViewportView(jTable5);
+
+        jButton14.setText("Deletar Consulta");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1158, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jButton14)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton14)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1049,18 +1044,34 @@ public class Principal extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -1068,15 +1079,15 @@ public class Principal extends javax.swing.JFrame {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Acompanhar Tratamento", jPanel10);
@@ -1156,126 +1167,43 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
     private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
-//        Controller.jTableMostraClientes(jTable1);
-//        if (!Controller.jTableMostraAnimais(jTable2))
-//            JOptionPane.showMessageDialog(this, "Selecione um cliente.");
+        //        Controller.jTableMostraClientes(jTable1);
+        //        if (!Controller.jTableMostraAnimais(jTable2))
+        //            JOptionPane.showMessageDialog(this, "Selecione um cliente.");
     }//GEN-LAST:event_jTabbedPane2FocusGained
 
-    // Cliente
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable1.getModel()).getItem(jTable1.getSelectedRow()));
-        limparCamposCliente();
-        Controller.jTableMostraAnimais(jTable2);
-    }//GEN-LAST:event_jTable1MousePressed
-
-    private void limparCamposCliente() {
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-    }
-    
-    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
-        Controller.atualizarBuscaCliente(jTable1, jTextField2.getText());
-    }//GEN-LAST:event_jTextField2KeyTyped
-
-    // Cadastrar novo cliente 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTable1.getModel() instanceof ClienteTableModel)
-            ((GenericTableModel)jTable1.getModel()).addItem(Controller.adicionarCliente("", "", "", "", ""));
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    // Mostra todos os clientes
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ((GenericTableModel)jTable1.getModel()).addListOfItems(Controller.mostrarTodosClientes());
-        jTextField3.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    // Deletar cliente
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(Controller.getClienteSelecionado() != null) {
-            ((ClienteTableModel)jTable1.getModel()).removeItem(jTable1.getSelectedRow());
-            Controller.deletarCliente(Controller.getClienteSelecionado());
+    // Deletar consulta
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        if(Controller.getConsultaSelecionada() != null) {
+            ((ConsultaTableModel)jTable5.getModel()).removeItem(jTable5.getSelectedRow());
+            Controller.deletarConsulta(Controller.getConsultaSelecionada());
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton14ActionPerformed
 
-    // Animal
-    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable2.getModel()).getItem(jTable2.getSelectedRow()));
-        Controller.jTableMostraVets(jTable3);
-        Controller.jTableMostraTratamentos(jTable4);
-    }//GEN-LAST:event_jTable2MousePressed
+    // Consultas    
+    private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable5.getModel()).getItem(jTable5.getSelectedRow()));
+        Controller.jTableMostraExames(jTable6);
+        Controller.jTableMostraPagamentos(jTable8);
+    }//GEN-LAST:event_jTable5MousePressed
 
-    // Cadastrar novo animal
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(Controller.getClienteSelecionado() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione um cliente antes de prosseguir.", "Cliente Não Selecionado", JOptionPane.ERROR_MESSAGE);
-            return;
+    // Deletar Tratamento
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        if(Controller.getTratamentoSelecionado() != null) {
+            ((TratamentoTableModel)jTable4.getModel()).removeItem(jTable4.getSelectedRow());
+            Controller.deletarTratamento(Controller.getTratamentoSelecionado());
         }
-        // arrumar verificacao
-        if(Controller.getClasseAnimalSelecionada() == null || generoSelecionado.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione o sexo e a classe do animal antes de prosseguir.", "Erro de cadastro.", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", "", generoSelecionado, 0.0));
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton17ActionPerformed
 
-    // Deletar animal
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(Controller.getAnimalSelecionado() != null) {
-            ((AnimalTableModel)jTable2.getModel()).removeItem(jTable2.getSelectedRow());
-            Controller.deletarAnimal(Controller.getAnimalSelecionado());
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    // Tabelas de seleção de classe
-    private void jTable10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable10MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable10.getModel()).getItem(jTable10.getSelectedRow()));
-    }//GEN-LAST:event_jTable10MousePressed
-
-    // Botões de seleção de sexo do animal
-    private void jRadioSexoFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoFemininoActionPerformed
-        generoSelecionado = Controller.femeaSelecionado();
-    }//GEN-LAST:event_jRadioSexoFemininoActionPerformed
-
-    private void jRadioSexoMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoMasculinoActionPerformed
-        generoSelecionado = Controller.machoSelecionado();
-    }//GEN-LAST:event_jRadioSexoMasculinoActionPerformed
-
-    // Veterinário
-    private void jTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable3.getModel()).getItem(jTable3.getSelectedRow()));
-        jTextField8.setText(Controller.vetSelecionado.getNome());
-        atualizarPeriodoComboBox();
-    }//GEN-LAST:event_jTable3MousePressed
-
-    //Busca do veterinário
-    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
-        Controller.atualizarBuscaVeterinario(jTable3, jTextField6.getText());
-    }//GEN-LAST:event_jTextField6KeyTyped
-
-    // Mostra todos os veterinários
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ((GenericTableModel)jTable3.getModel()).addListOfItems(Controller.mostrarTodosVets());
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    // Cadastra novo veterinários
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if (Controller.getClasseAnimalSelecionada() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione uma classe animal na tabela antes de cadastrar um novo veterinário.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+    // Novo tratamento
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        if (Controller.getAnimalSelecionado() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um animal antes de adicionar um novo tratamento.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
         } else {
-            if (jTable3.getModel() instanceof VeterinarioTableModel) {
-                ((GenericTableModel)jTable3.getModel()).addItem(Controller.adicionarVeterinario("", "", "", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", ""));
-            }
+            if (jTable4.getModel() instanceof TratamentoTableModel)
+            ((GenericTableModel)jTable4.getModel()).addItem(Controller.adicionarTratamento("", "", ""));
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    // Deletar veterinário
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if(Controller.getVetSelecionado() != null) {
-            ((VeterinarioTableModel)jTable3.getModel()).removeItem(jTable3.getSelectedRow());
-            Controller.deletarVet(Controller.getVetSelecionado());
-        }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     // Tratamento
     private void jTable4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MousePressed
@@ -1288,30 +1216,21 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable4MousePressed
 
-    // Novo tratamento
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        if (Controller.getAnimalSelecionado() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione um animal antes de adicionar um novo tratamento.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (jTable4.getModel() instanceof TratamentoTableModel)
-                ((GenericTableModel)jTable4.getModel()).addItem(Controller.adicionarTratamento("", "", ""));
-        }
-    }//GEN-LAST:event_jButton16ActionPerformed
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        String statusSelecionado = (String) jComboBox2.getSelectedItem();
+        jTextField9.setText(statusSelecionado);
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    // Deletar Tratamento
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        if(Controller.getTratamentoSelecionado() != null) {
-            ((TratamentoTableModel)jTable4.getModel()).removeItem(jTable4.getSelectedRow());
-            Controller.deletarTratamento(Controller.getTratamentoSelecionado());
-        }
-    }//GEN-LAST:event_jButton17ActionPerformed
+    // combo box
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String periodoSelecionado = (String) jComboBox1.getSelectedItem();
+        jTextField13.setText(periodoSelecionado);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    // Consultas    
-    private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable5.getModel()).getItem(jTable5.getSelectedRow()));
-        Controller.jTableMostraExames(jTable6);
-        Controller.jTableMostraPagamentos(jTable8);
-    }//GEN-LAST:event_jTable5MousePressed
+    // Pagamento efetuado
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     // Agendar consulta
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1338,6 +1257,16 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "O valor da consulta deve ser maior do que zero.", "Valor da Consulta Inválido", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
+            String valorPagoString = jTextField7.getText().replace(",", ".");
+            Double valorPago = Double.valueOf(valorPagoString);
+            if (valorPago <= 0) {
+                JOptionPane.showMessageDialog(this, "O valor pago deve ser maior do que zero.", "Valor Pago Inválido", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if (valorPago > valor) {
+                JOptionPane.showMessageDialog(this, "O valor pago deve ser menor ou igual ao da consulta.", "Valor Pago Inválido", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             if (dataConsultaSelecionada == null || dataPagamentoSelecionada == null || status.isEmpty() || periodo.isEmpty() || valor.isNaN() || motivo.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Campos Incompletos", JOptionPane.ERROR_MESSAGE);
@@ -1348,7 +1277,7 @@ public class Principal extends javax.swing.JFrame {
             String dataConsulta = dateFormat.format(dataConsultaSelecionada);
             String dataPagamento = dateFormat.format(dataPagamentoSelecionada);
 
-            if(!Controller.agendarConsulta(dataConsulta, Controller.getVetSelecionado().getCodigo(), status, tratamentoId, periodo, valor, dataPagamento, motivo, observacoes, pagamentoEfetuado)) {
+            if(!Controller.agendarConsulta(dataConsulta, Controller.getVetSelecionado().getCodigo(), status, tratamentoId, periodo, valor, valorPago, dataPagamento, motivo, observacoes, pagamentoEfetuado)) {
                 JOptionPane.showMessageDialog(this, "O veterinário selecionado não possui disponibilidade na data selecionada. Por favor, escolha outra data, período, ou veterinário.", "Data Indisponível", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -1359,22 +1288,169 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    // combo box
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        String periodoSelecionado = (String) jComboBox1.getSelectedItem();
-        jTextField13.setText(periodoSelecionado);
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    // Veterinário
+    private void jTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable3.getModel()).getItem(jTable3.getSelectedRow()));
+        jTextField8.setText(Controller.vetSelecionado.getNome());
+        atualizarPeriodoComboBox();
+    }//GEN-LAST:event_jTable3MousePressed
 
-    // Pagamento efetuado
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    // Deletar veterinário
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        if(Controller.getVetSelecionado() != null) {
+            ((VeterinarioTableModel)jTable3.getModel()).removeItem(jTable3.getSelectedRow());
+            Controller.deletarVet(Controller.getVetSelecionado());
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    // Cadastra novo veterinários
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if (Controller.getClasseAnimalSelecionada() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma classe animal na tabela antes de cadastrar um novo veterinário.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (jTable3.getModel() instanceof VeterinarioTableModel) {
+                ((GenericTableModel)jTable3.getModel()).addItem(Controller.adicionarVeterinario("", "", "", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", ""));
+            }
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        String statusSelecionado = (String) jComboBox2.getSelectedItem();
-        jTextField9.setText(statusSelecionado);
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    // Mostra todos os veterinários
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        ((GenericTableModel)jTable3.getModel()).addListOfItems(Controller.mostrarTodosVets());
+    }//GEN-LAST:event_jButton6ActionPerformed
 
+    //Busca do veterinário
+    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+        Controller.atualizarBuscaVeterinario(jTable3, jTextField6.getText());
+    }//GEN-LAST:event_jTextField6KeyTyped
+
+    private void jRadioSexoMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoMasculinoActionPerformed
+        generoSelecionado = Controller.machoSelecionado();
+    }//GEN-LAST:event_jRadioSexoMasculinoActionPerformed
+
+    // Botões de seleção de sexo do animal
+    private void jRadioSexoFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoFemininoActionPerformed
+        generoSelecionado = Controller.femeaSelecionado();
+    }//GEN-LAST:event_jRadioSexoFemininoActionPerformed
+
+    // Tabelas de seleção de classe
+    private void jTable10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable10MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable10.getModel()).getItem(jTable10.getSelectedRow()));
+    }//GEN-LAST:event_jTable10MousePressed
+
+    // Animal
+    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable2.getModel()).getItem(jTable2.getSelectedRow()));
+        Controller.jTableMostraVets(jTable3);
+        Controller.jTableMostraTratamentos(jTable4);
+    }//GEN-LAST:event_jTable2MousePressed
+
+    // Deletar animal
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(Controller.getAnimalSelecionado() != null) {
+            ((AnimalTableModel)jTable2.getModel()).removeItem(jTable2.getSelectedRow());
+            Controller.deletarAnimal(Controller.getAnimalSelecionado());
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    // Cadastrar novo animal
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(Controller.getClienteSelecionado() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um cliente antes de prosseguir.", "Cliente Não Selecionado", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // arrumar verificacao
+        if(Controller.getClasseAnimalSelecionada() == null || generoSelecionado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione o sexo e a classe do animal antes de prosseguir.", "Erro de cadastro.", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ((GenericTableModel)jTable2.getModel()).addItem(Controller.adicionarAnimal("", Controller.getClasseAnimalSelecionada().getNomeClasse(), "", "", generoSelecionado, 0.0));
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    // Cliente
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable1.getModel()).getItem(jTable1.getSelectedRow()));
+        limparCamposCliente();
+        Controller.jTableMostraAnimais(jTable2);
+    }//GEN-LAST:event_jTable1MousePressed
+
+    // Deletar cliente
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(Controller.getClienteSelecionado() != null) {
+            ((ClienteTableModel)jTable1.getModel()).removeItem(jTable1.getSelectedRow());
+            Controller.deletarCliente(Controller.getClienteSelecionado());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    // Cadastrar novo cliente 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (jTable1.getModel() instanceof ClienteTableModel)
+        ((GenericTableModel)jTable1.getModel()).addItem(Controller.adicionarCliente("", "", "", "", ""));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    // Mostra todos os clientes
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ((GenericTableModel)jTable1.getModel()).addListOfItems(Controller.mostrarTodosClientes());
+        jTextField3.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        Controller.atualizarBuscaCliente(jTable1, jTextField2.getText());
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    // Adicionar um novo pagamento para uma consulta
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        if (Controller.getConsultaSelecionada() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma consulta antes de adicionar um pagamento.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (jTable8.getModel() instanceof PagamentoTableModel)
+                ((GenericTableModel)jTable8.getModel()).addItem(Controller.adicionarPagamento(0.0, 0.0, "", false));
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    // Deletar um pagamento de uma consulta
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if(Controller.getPagamentoSelecionado() != null) {
+            ((PagamentoTableModel)jTable8.getModel()).removeItem(jTable8.getSelectedRow());
+            Controller.deletarPagamento(Controller.getPagamentoSelecionado());
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    // Pagamento
+    private void jTable8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable8.getModel()).getItem(jTable8.getSelectedRow()));
+    }//GEN-LAST:event_jTable8MousePressed
+
+    // Deletar exame
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        if(Controller.getExameSelecionado() != null) {
+            ((ExameTableModel)jTable6.getModel()).removeItem(jTable6.getSelectedRow());
+            Controller.deletarExame(Controller.getExameSelecionado());
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    // Novo exame
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        if (Controller.getConsultaSelecionada() == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma consulta antes de adicionar um exame.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            if (jTable6.getModel() instanceof ExameTableModel)
+            ((GenericTableModel)jTable6.getModel()).addItem(Controller.adicionarExame("", "", ""));
+        }
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    // Exames
+    private void jTable6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6MousePressed
+        Controller.setSelecionado(((GenericTableModel) jTable6.getModel()).getItem(jTable6.getSelectedRow()));
+    }//GEN-LAST:event_jTable6MousePressed
+
+    private void limparCamposCliente() {
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+    }
+    
     private void atualizarPeriodoComboBox() {
         List<String> periodos = new ArrayList<>();
         String horaAtendimento = Controller.vetSelecionado.getHoraAtendimento();
@@ -1405,61 +1481,6 @@ public class Principal extends javax.swing.JFrame {
         jTextArea3.setText("");
         jCheckBox2.setSelected(false);
     }
-
-    // Deletar consulta
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        if(Controller.getConsultaSelecionada() != null) {
-            ((ConsultaTableModel)jTable5.getModel()).removeItem(jTable5.getSelectedRow());
-            Controller.deletarConsulta(Controller.getConsultaSelecionada());
-        }
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    // Exames
-    private void jTable6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6MousePressed
-         Controller.setSelecionado(((GenericTableModel) jTable6.getModel()).getItem(jTable6.getSelectedRow()));
-    }//GEN-LAST:event_jTable6MousePressed
-
-    // Novo exame
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        if (Controller.getConsultaSelecionada() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione uma consulta antes de adicionar um exame.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
-        }
-        else {
-            if (jTable6.getModel() instanceof ExameTableModel)
-                ((GenericTableModel)jTable6.getModel()).addItem(Controller.adicionarExame("", "01/01/01", ""));
-        }
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    // Deletar exame
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        if(Controller.getExameSelecionado() != null) {
-            ((ExameTableModel)jTable6.getModel()).removeItem(jTable6.getSelectedRow());
-            Controller.deletarExame(Controller.getExameSelecionado());
-        }
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    // Pagamento
-    private void jTable8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MousePressed
-        Controller.setSelecionado(((GenericTableModel) jTable8.getModel()).getItem(jTable8.getSelectedRow()));
-    }//GEN-LAST:event_jTable8MousePressed
-
-    // Adicionar um novo pagamento para uma consulta
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if (Controller.getConsultaSelecionada() == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione uma consulta antes de adicionar um pagamento.", "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (jTable8.getModel() instanceof PagamentoTableModel)
-                ((GenericTableModel)jTable8.getModel()).addItem(Controller.adicionarPagamento(0.0, "", false));
-        }
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    // Deletar um pagamento de uma consulta
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if(Controller.getPagamentoSelecionado() != null) {
-            ((PagamentoTableModel)jTable8.getModel()).removeItem(jTable8.getSelectedRow());
-            Controller.deletarPagamento(Controller.getPagamentoSelecionado());
-        }
-    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1529,6 +1550,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1586,6 +1608,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
