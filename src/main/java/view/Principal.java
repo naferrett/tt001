@@ -1699,6 +1699,9 @@ public class Principal extends javax.swing.JFrame {
     // busca por data da consulta
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         Date dataConsultaSelecionada = jDateChooser3.getDate();
+        if(dataConsultaSelecionada == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma data antes de buscar uma consulta.", "Erro de Busca", JOptionPane.ERROR_MESSAGE);
+        }
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataConsulta = dateFormat.format(dataConsultaSelecionada);
         
