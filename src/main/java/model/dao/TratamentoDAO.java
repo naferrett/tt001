@@ -80,6 +80,9 @@ public class TratamentoDAO extends DAO {
         return this.retrieve("SELECT * FROM tratamento WHERE animal_tratado = " + animalTratado);
     }
 
+    public List retrieveAll() {
+        return this.retrieve("SELECT * FROM tratamento");
+    }
     
     // Update
     public void update(Tratamento tratamento) {

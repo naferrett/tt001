@@ -1,6 +1,11 @@
 package controller;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -258,6 +263,44 @@ public class Controller {
         PagamentoDAO.getInstance().create(valor, valorPago, pagamentoEfetuado, dataPagamento, novaConsulta.getCodigo());
         return true;
     }
+
+    public static void jTableMostraTodasConsultas(JTable table) {
+        setTableModel(table, new TodasConsultasTableModel(ConsultaDAO.getInstance().retrieveAll()));
+    }
+    
+    public static List<Object> mostrarTodasConsultas() {
+        return ConsultaDAO.getInstance().retrieveAll();
+    }
+
+    public static List<Object> buscarConsultaPorData(String data) {
+        return ConsultaDAO.getInstance().retrievebyData(data);
+    }
+    
+    public static void atualizaBuscaConsultaPorData(JTable table, String data) {
+        ((GenericTableModel)table.getModel()).addListOfItems(Controller.buscarConsultaPorData(data));
+    }
+    
+    public static List mostrarConsultasRecentes() {
+    List consultas = ConsultaDAO.getInstance().retrieveAll();
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    consultas.sort(new Comparator<Consulta>() {
+        @Override
+        public int compare(Consulta c1, Consulta c2) {
+            try {
+                Date data1 = dateFormat.parse(c1.getData());
+                Date data2 = dateFormat.parse(c2.getData());
+                return data2.compareTo(data1); // da mais recente pra mais antiga
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
+    });
+
+    return consultas;
+}
     
     // Exames
     public static boolean jTableMostraExames(JTable table) {
