@@ -69,7 +69,8 @@ public class TodasConsultasTableModel extends GenericTableModel {
                 Veterinario vetResponsavel = VeterinarioDAO.getInstance().retrieveById(consultas.getVeterinario_id());
                 if(vetResponsavel != null)
                     return vetResponsavel.getNome();
-                return "";
+                else
+                    return consultas.getNome_vet();
             case 3:
                 return consultas.getStatus();
             case 4:

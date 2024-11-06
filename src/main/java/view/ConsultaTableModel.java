@@ -58,9 +58,10 @@ public class ConsultaTableModel extends GenericTableModel{
                 return  consultasTratamento.getPeriodo();
             case 2:
                 Veterinario vetResponsavel = VeterinarioDAO.getInstance().retrieveById(consultasTratamento.getVeterinario_id());
-                if(vetResponsavel != null)
+                if(vetResponsavel == null)
+                    return consultasTratamento.getNome_vet();
+                else
                     return vetResponsavel.getNome();
-                return "";
             case 3:
                 return consultasTratamento.getStatus();
             case 4:

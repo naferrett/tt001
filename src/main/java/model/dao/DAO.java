@@ -135,12 +135,13 @@ public abstract class DAO {
                     + "data VARCHAR(20), \n"
                     + "periodo VARCHAR(20), \n"
                     + "veterinario_id INT, \n"
+                    + "nome_vet VARCHAR(50), \n"
                     + "status VARCHAR(50), \n"
                     + "motivo VARCHAR(300), \n"
                     + "observacoes TEXT, \n"
                     + "resultados TEXT, \n"
                     + "tratamento_id INT, \n"
-                    + "FOREIGN KEY (veterinario_id) REFERENCES veterinario(codigo), \n"
+                    + "FOREIGN KEY (veterinario_id) REFERENCES veterinario(codigo) ON DELETE SET NULL, \n"
                     + "FOREIGN KEY (tratamento_id) REFERENCES tratamento(codigo)); \n");
             executeUpdate(stmt);
 

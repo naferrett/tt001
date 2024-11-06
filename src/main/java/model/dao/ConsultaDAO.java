@@ -25,18 +25,19 @@ public class ConsultaDAO extends DAO {
     }
 
     // CRUD
-    public Consulta create(String data, String periodo, int veterinarioId, String status, String motivo, String observacoes, String resultados, int tratamentoId) {
+    public Consulta create(String data, String periodo, int veterinarioId, String nome_vet, String status, String motivo, String observacoes, String resultados, int tratamentoId) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO consulta (data, periodo, veterinario_id, status, motivo, observacoes, resultados, tratamento_id) VALUES (?,?,?,?,?,?,?,?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO consulta (data, periodo, veterinario_id, nome_vet, status, motivo, observacoes, resultados, tratamento_id) VALUES (?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, data);
             stmt.setString(2, periodo);
             stmt.setInt(3, veterinarioId);
-            stmt.setString(4, status);
-            stmt.setString(5, motivo);
-            stmt.setString(6, observacoes);
-            stmt.setString(7, resultados);
-            stmt.setInt(8, tratamentoId);
+            stmt.setString(4, nome_vet);
+            stmt.setString(5, status);
+            stmt.setString(6, motivo);
+            stmt.setString(7, observacoes);
+            stmt.setString(8, resultados);
+            stmt.setInt(9, tratamentoId);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,6 +53,7 @@ public class ConsultaDAO extends DAO {
             consulta.setData(rs.getString("data"));
             consulta.setPeriodo(rs.getString("periodo"));
             consulta.setVeterinario_id(rs.getInt("veterinario_id"));
+            consulta.setNome_vet(rs.getString("nome_vet"));
             consulta.setStatus(rs.getString("status"));
             consulta.setMotivo(rs.getString("motivo"));
             consulta.setObservacoes(rs.getString("observacoes"));
@@ -105,16 +107,17 @@ public class ConsultaDAO extends DAO {
     public void update(Consulta consulta) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE consulta SET data=?, periodo=?, veterinario_id=?, status=?, motivo=?, observacoes=?, resultados=?, tratamento_id=? WHERE codigo=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE consulta SET data=?, periodo=?, veterinario_id=?, nome_vet=?, status=?, motivo=?, observacoes=?, resultados=?, tratamento_id=? WHERE codigo=?");
             stmt.setString(1, consulta.getData());
             stmt.setString(2, consulta.getPeriodo());
             stmt.setInt(3, consulta.getVeterinario_id());
-            stmt.setString(4, consulta.getStatus());
-            stmt.setString(5, consulta.getMotivo());
-            stmt.setString(6, consulta.getObservacoes());
-            stmt.setString(7, consulta.getResultados());
-            stmt.setInt(8, consulta.getTratamento_id());
-            stmt.setInt(9, consulta.getCodigo());
+            stmt.setString(4, consulta.getNome_vet());
+            stmt.setString(5, consulta.getStatus());
+            stmt.setString(6, consulta.getMotivo());
+            stmt.setString(7, consulta.getObservacoes());
+            stmt.setString(8, consulta.getResultados());
+            stmt.setInt(9, consulta.getTratamento_id());
+            stmt.setInt(10, consulta.getCodigo());
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());

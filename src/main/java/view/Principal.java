@@ -50,6 +50,8 @@ public class Principal extends javax.swing.JFrame {
         jTextField12.setText("");
         jTextField13.setText("");
 
+        //Controller.criarClassesAnimais();
+
         generoButtonGroup = new ButtonGroup();
         generoButtonGroup.add(jRadioSexoFeminino);
         generoButtonGroup.add(jRadioSexoMasculino);
@@ -1523,7 +1525,7 @@ public class Principal extends javax.swing.JFrame {
     
     private void atualizarTabelasPosInserirConsulta() {
         Controller.jTableMostraConsultas(jTable5);
-        //Controller.jTableMostraTodasConsultas(jTable9);
+        Controller.jTableMostraTodasConsultas(jTable9);
     }
 
     // Agendar consulta
@@ -1565,7 +1567,7 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
 
-            if (dataConsultaSelecionada == null || dataPagamentoSelecionada == null || status.isEmpty() || periodo.isEmpty() || valor.isNaN() || motivo.isEmpty()) {
+            if (dataConsultaSelecionada == null || dataPagamentoSelecionada == null || status.isEmpty() || periodo.isEmpty() || valor.isNaN() || valor == null || motivo.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Campos Incompletos", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -1582,13 +1584,36 @@ public class Principal extends javax.swing.JFrame {
             limparCamposConsulta();
             atualizarTabelasPosInserirConsulta();
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, insira um valor válido.", "Valor da Consulta Inválido", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor, insira valores válidos.", "Campos de Agendamento Inválidos", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    // Busca por data 
-    
-    
+    // Busca por data da consulta
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+       try {
+           Date dataConsultaSelecionada = jDateChooser3.getDate();
+
+           SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+           String dataConsulta = dateFormat.format(dataConsultaSelecionada);
+
+           Controller.atualizaBuscaConsultaPorData(jTable9, dataConsulta);
+       }
+       catch(NullPointerException e) {
+           JOptionPane.showMessageDialog(this, "Por favor, selecione uma data antes de buscar uma consulta.", "Erro de Busca", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    // Todas as consultas
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        ((GenericTableModel)jTable9.getModel()).addListOfItems(Controller.mostrarTodasConsultas());
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    //  Mostrar consultas recentes
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        ((GenericTableModel)jTable9.getModel()).addListOfItems(Controller.mostrarConsultasRecentes());
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         String statusSelecionado = (String) jComboBox2.getSelectedItem();
         jTextField9.setText(statusSelecionado);
@@ -1696,29 +1721,6 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jDateChooser3KeyTyped
 
-    // busca por data da consulta
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        Date dataConsultaSelecionada = jDateChooser3.getDate();
-        if(dataConsultaSelecionada == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione uma data antes de buscar uma consulta.", "Erro de Busca", JOptionPane.ERROR_MESSAGE);
-        }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dataConsulta = dateFormat.format(dataConsultaSelecionada);
-        
-        Controller.atualizaBuscaConsultaPorData(jTable9, dataConsulta);
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    // todas as consultas
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        ((GenericTableModel)jTable9.getModel()).addListOfItems(Controller.mostrarTodasConsultas());
-    }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        ((GenericTableModel)jTable9.getModel()).addListOfItems(Controller.mostrarConsultasRecentes());
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    
-    
     
     /**
      * @param args the command line arguments

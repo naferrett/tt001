@@ -257,9 +257,11 @@ public class Controller {
                 return false;
             }
         }
-        
+
+        String vetSelecionadoNome = (VeterinarioDAO.getInstance().retrieveById(vetSelecionado)).getNome();
+
         String resultados = "";
-        Consulta novaConsulta = ConsultaDAO.getInstance().create(data, periodo, vetSelecionado, status, motivo, observacoes, resultados, tratamentoId);
+        Consulta novaConsulta = ConsultaDAO.getInstance().create(data, periodo, vetSelecionado, vetSelecionadoNome, status, motivo, observacoes, resultados, tratamentoId);
         PagamentoDAO.getInstance().create(valor, valorPago, pagamentoEfetuado, dataPagamento, novaConsulta.getCodigo());
         return true;
     }

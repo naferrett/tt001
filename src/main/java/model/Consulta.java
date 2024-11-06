@@ -10,6 +10,7 @@ public class Consulta {
     private String data;
     private String periodo;
     private int veterinario_id;
+    private String nome_vet;
     private String motivo;
     private String status;
     private String observacoes;
